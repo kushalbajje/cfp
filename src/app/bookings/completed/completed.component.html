@@ -1,0 +1,215 @@
+<div style="padding-top:16rem;">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-6 col-lg-5 left-component"
+      style="height: calc(100vh - 16rem);overflow: auto;box-shadow: 0rem 0.5rem 1.5rem #0000001F;">
+      <div class="px-4 ml-4" style="box-shadow: 0rem 0.5rem 1.5rem #0000001F;background-color: #fff;">
+        <div class="d-flex justify-content-between align-items-center" style="padding-top:3rem;padding-bottom: 1rem;">
+          <p class="title-medium ">{{type}}</p>
+          <div class="float-right">
+            <div class="d-flex" style="cursor: pointer;">
+              <h2 mat-button [matMenuTriggerFor]="belowMenu" class="mr-1">Filter by</h2>
+              <mat-icon matSuffix [matMenuTriggerFor]="belowMenu" [inline]="true" style="font-size: 1.625rem;margin-top: 0.25rem;">filter_list</mat-icon>
+            </div>
+
+            <mat-menu #belowMenu="matMenu" xPosition="before" yPosition="below">
+              <button mat-menu-item (click)="openBottomSheet();">By vehicle type</button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item>By company</button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item>By ride type</button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="list-group ">
+          <div class=" list-group-item card my-2 p-4" style="box-shadow: 0rem 0.1rem 0.5rem #4B4B4B1F;border: none;"
+            *ngFor="let ride of rides;">
+            <p class="title-small">{{ride.ride_type}} <span
+                class="float-right text-small justify-content-end">{{ride.pickup_time}}</span>
+            </p>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Business name
+                </p><span class="text-small-info ml-2">{{ride.company_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Ride ID
+                </p><span class="text-small-info ml-2">{{ride.trip_id}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Pickup
+                </p><span class="text-small-info ml-2"> {{ride.source_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Drop off
+                </p><span class="text-small-info ml-2"> {{ride.destination_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Vehicle type
+                </p><span class="text-small-info ml-2"> {{ride.vehicle_type}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Driver
+                </p><span class="text-small-info ml-2"> {{ride.driver_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Vehicle
+                </p><span class="text-small-info ml-2"> {{ride.vehicle_number}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12  text-right ">
+                <button class="btn btn-sm buttonSmall" (click)="viewDetails($event);">VIEW
+                  DETAILS</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-7 d-none d-md-block d-lg-block right-component">
+
+      <div class="map" id="map" style=" width: 100%;height: 100%;" *ngIf="toggle"></div>
+
+      <div *ngIf="toggle1" style="height:66vh;display: block;">
+        <div class="container-fluid p-5" [ngClass]="toggle?'d-none':'d-block'">
+
+          <div class="title-medium text-center d-inline position-absolute" style="left: 40%;">
+            View details
+          </div>
+          <div class="float-right d-inline">
+            <button class="btn btn-sm buttonSmall mr-3" matTooltip="removes this trip from your list"
+              matTooltipPosition="below">VIEW TRIP SHEET</button>
+            <button class="btn btn-sm close" (click)="closeviewDetails($event);">
+              CLOSE X
+            </button>
+          </div>
+
+          <div class="d-flex pt-5 justify-content-between w-100">
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>Company name</mat-label>
+              <input matInput placeholder="Company name" [(ngModel)]="companyName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>Ride type</mat-label>
+              <input matInput placeholder="Ride type" [(ngModel)]="rideType">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>Pickup date & time</mat-label>
+              <input matInput placeholder="Pickup date & time" [(ngModel)]="pickupDateAndTime">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>passenger name</mat-label>
+              <input matInput placeholder="Passenger name" [(ngModel)]="passengerName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>passenger number</mat-label>
+              <input matInput placeholder="Passenger number" [(ngModel)]="passengerNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>Vehicle category</mat-label>
+              <input matInput placeholder="Vehicle category" [(ngModel)]="vehicleCategory">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="two-input-fields px-3">
+              <mat-label>Pickup location</mat-label>
+              <input matInput placeholder="Pickup location" [(ngModel)]="pickupLocation">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="two-input-fields px-3">
+              <mat-label>Drop off location</mat-label>
+              <input matInput placeholder="Drop off location" [(ngModel)]="dropOffLocation">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>Driver name</mat-label>
+              <input matInput placeholder="Driver name" [(ngModel)]="driverName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>Driver number</mat-label>
+              <input matInput placeholder="Driver number" [(ngModel)]="driverNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields px-3">
+              <mat-label>Vehicle number</mat-label>
+              <input matInput placeholder="Vehicle number" [(ngModel)]="vehicleNumber">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="four-input-fields px-3">
+              <mat-label>Distance travelled</mat-label>
+              <input matInput placeholder="Distance travelled" [(ngModel)]="distanceTravelled">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields px-3">
+              <mat-label>Base fare</mat-label>
+              <input matInput placeholder="Base fare" [(ngModel)]="baseFare">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields px-3">
+              <mat-label>GST</mat-label>
+              <input matInput placeholder="GST" [(ngModel)]="gst">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields px-3">
+              <mat-label>Total fare</mat-label>
+              <input matInput placeholder="Total fare" [(ngModel)]="totalFare">
+            </mat-form-field>
+
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="two-input-fields px-3">
+              <mat-label>Start odometer reading</mat-label>
+              <input matInput placeholder="Start odometer reading" [(ngModel)]="startOdometerReading">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="two-input-fields px-3">
+              <mat-label>End odometer reading</mat-label>
+              <input matInput placeholder="End odometer reading" [(ngModel)]="endOdometerReading">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="map" id="map1" style="height: 40%;"></div>
+        <mat-horizontal-stepper style="padding-bottom: 4rem;" labelPosition="bottom">
+          <ng-template matStepperIcon="edit">
+            <mat-icon>done</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="number">
+            <mat-icon></mat-icon>
+          </ng-template>
+          <mat-step>
+            <ng-template matStepLabel>Step one</ng-template>
+          </mat-step>
+          <mat-step>
+            <mat-icon>done</mat-icon>
+            <ng-template matStepLabel>Step two</ng-template>
+          </mat-step>
+          <mat-step>
+            <mat-icon>done</mat-icon>
+            <ng-template matStepLabel>Step three</ng-template>
+          </mat-step>
+          <mat-step>
+            <mat-icon>done</mat-icon>
+            <ng-template matStepLabel>Step four</ng-template>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+</div>

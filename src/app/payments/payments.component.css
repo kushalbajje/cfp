@@ -1,0 +1,73 @@
+mat-grid-tile {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 4px 12px #0000000F;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+mat-grid-tile.first {
+  width: calc((22% - 0.75px) * 3 + 2px) !important;
+}
+
+mat-grid-tile.rest {
+  width: calc((30% - 7.5px) * 1 + 0px) !important;
+  left: calc((23% - 7.5px + 10px) * 3) !important;
+}
+
+.card {
+  border: none;
+}
+
+.businessPartner {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #D0D0D03E;
+  border-radius: 6px;
+  opacity: 1;
+}
+
+
+.mat-button-toggle {
+  background-color: #FFFFFF;
+  align-self: center;
+  font: normal normal 600 0.875rem Exo;
+  letter-spacing: 0rem;
+  color: #020C26;
+  opacity: 1;
+  width: 5rem;
+
+}
+
+.mat-button-toggle-checked {
+  background: #020C26 0% 0% no-repeat padding-box;
+  text-align: left;
+  font: normal normal 600 0.875rem Exo;
+  letter-spacing: 0rem;
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+mat-button-toggle-group {
+  background: #b4b3b3 0% 0% no-repeat padding-box;
+  border-top: 1px solid #9b7f7f36;
+  border-bottom: 1px solid #9b7f7f36;
+  border-radius: 0.375rem;
+  /* width: 8rem; */
+  height: 2.5rem;
+}
+
+hr {
+  margin: 0em;
+}
+
+.rest {
+  cursor: pointer;
+}
+
+.mat-form-field {
+  line-height: unset !important;
+  font: normal normal normal 0.8rem Exo !important;
+  letter-spacing: 0rem !important;
+  color: #020C26 !important;
+  opacity: 1 !important;
+}
+

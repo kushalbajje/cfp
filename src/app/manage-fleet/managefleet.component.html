@@ -1,0 +1,31 @@
+<div class="container-fluid full-vh" style="padding: 3rem;" *ngIf="outlet.isActivated == false">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <div>
+        <p [routerLink]="['/sidenav/bookings']" class="breadCrumbs-small">Home</p>
+      </div>
+      <div class="breadCrumbs-large my-auto pt-2">
+        Manage Fleet
+      </div>
+
+      <div class="container no-gutters">
+        <div class="row no-gutters mt-5">
+          <div class="col-12 col-md-12 col-lg-6 p-3">
+            <div class="card p-4 px-5 d-flex flex-row" [routerLink]="['/sidenav/managefleet/ownedfleet']">
+              <img src="../../assets/images/ownedfleet.svg" class="card-img my-1" alt="">
+              <div style="width: 100%;align-self: center;" class="card-font-medium p-4">Owned fleet</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-6 p-3">
+            <div class="card p-4 px-5 d-flex flex-row" [routerLink]="['/sidenav/managefleet/leasedfleet']">
+              <img src="../../assets/images/leasedfleet.svg" class="card-img my-1" alt="">
+              <div style="width: 100%;align-self: center;" class="card-font-medium p-4">Leased fleet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<router-outlet #outlet="outlet"></router-outlet>

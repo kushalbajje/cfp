@@ -1,0 +1,353 @@
+ <!-- Add new vehicle -->
+ <div style="padding: 3rem;background-color: #FAFAFA;">
+   <div class="row no-gutters">
+     <div class="col-12">
+       <div class="d-flex justify-content-between">
+         <div class="d-flex">
+           <p class="breadCrumbs-small" [routerLink]="['/sidenav/bookings']">Home</p>
+           <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managefleet']">Manage fleet</p>
+           <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managefleet/ownedfleet']">Owned fleet</p>
+         </div>
+       </div>
+       <p class="breadCrumbs-medium mt-2">Add new vehicle</p>
+
+       <div class="row no-gutters mt-5">
+         <div class="col-12">
+           <div class="container-fluid" style="padding: 4rem;">
+             <div class="title-medium text-center d-inline position-absolute" style="left: 40%;">
+               Add new vehicle
+             </div>
+             <div class="float-right">
+               <button class="btn btn-sm close d-inline" [routerLink]="['/sidenav/managefleet/ownedfleet/managevehicles']">
+                 CLOSE X
+               </button>
+             </div>
+             <!-- Basic information -->
+             <div class="border-bottom pt-5">
+               <p class="pb-2 font-medium2">Basic information</p>
+               <div class="d-flex justify-content-between my-4">
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Vehicle number</mat-label>
+                   <input matInput placeholder="Vehicle number" [(ngModel)]="vehicleNumber">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Vehicle make</mat-label>
+                   <input matInput placeholder="Vehicle make" [(ngModel)]="vehicleMake">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Vehicle model</mat-label>
+                   <input matInput placeholder="Vehicle model" [(ngModel)]="vehicleModel">
+                 </mat-form-field>
+               </div>
+               <div class="d-flex justify-content-between my-4">
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Vehicle name</mat-label>
+                   <input matInput placeholder="vehicle name" [(ngModel)]="vehicleName">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Color</mat-label>
+                   <input matInput placeholder="Color" [(ngModel)]="vehicleColor">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Fuel type</mat-label>
+                   <mat-select>
+                     <mat-option *ngFor="let fuel of fuelType" [value]="fuel">{{fuel}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+               </div>
+               <div class="d-flex justify-content-between my-4 form-padding">
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Seating capacity(including driver)</mat-label>
+                   <input matInput placeholder="Seating capacity" [(ngModel)]="vehicleSeatingCapacity">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Chassis number</mat-label>
+                   <input matInput placeholder="Chassis number" [(ngModel)]="vehicleChassisNumber">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Engine number</mat-label>
+                   <input matInput placeholder="Engine number" [(ngModel)]="vehicleEngineNumber">
+                 </mat-form-field>
+               </div>
+
+             </div>
+             <!-- Assign driver and branch -->
+             <div class="border-bottom pt-5">
+               <p class="pb-2 font-medium2">Assign driver and branch</p>
+               <div class="d-flex justify-content-between my-4 form-padding">
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Assign branch</mat-label>
+                   <mat-select>
+                     <mat-option *ngFor="let branch of branches" [value]="branch">{{branch}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields  ">
+                   <mat-label>Assign driver</mat-label>
+                   <mat-select>
+                     <mat-option *ngFor="let driver of drivers" [value]="driver">{{driver}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Driver mobile number</mat-label>
+                   <input matInput placeholder="Driver mobile number">
+                 </mat-form-field>
+               </div>
+             </div>
+             <!-- Loan -->
+             <div class="border-bottom pt-5">
+               <p class="pb-2 font-medium2">Loan</p>
+               <div class="d-flex justify-content-between my-4">
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>EMI Amount</mat-label>
+                   <input matInput placeholder="EMI Amount">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields  ">
+                   <mat-label>Start date</mat-label>
+                   <input matInput [matDatepicker]="start_date">
+                   <mat-datepicker-toggle matSuffix [for]="start_date">
+                     <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                   </mat-datepicker-toggle>
+                   <mat-datepicker #start_date></mat-datepicker>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields  ">
+                   <mat-label>End date</mat-label>
+                   <input matInput [matDatepicker]="end_date">
+                   <mat-datepicker-toggle matSuffix [for]="end_date">
+                     <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                   </mat-datepicker-toggle>
+                   <mat-datepicker #end_date></mat-datepicker>
+                 </mat-form-field>
+               </div>
+               <div class="d-flex justify-content-between my-4 form-padding">
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>Bank name</mat-label>
+                   <mat-select>
+                     <mat-option *ngFor="let bank of banks" [value]="bank">{{bank}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields">
+                   <mat-label>EMI Day</mat-label>
+                   <mat-select>
+                     <mat-option *ngFor="let day of days" [value]="day">{{day}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <!-- Dummy value -->
+                 <mat-form-field appearance="outline" class="three-input-fields" style="opacity: 0;">
+                   <mat-label>Vehicle number</mat-label>
+                   <input matInput [disabled]="true">
+                 </mat-form-field>
+               </div>
+             </div>
+             <!-- Vehicle documents -->
+             <div class="border-bottom pt-5">
+               <p class="pb-2 font-medium2">Vehicle documents</p>
+               <div class="d-flex justify-content-around my-4 form-padding">
+                 <!-- Registration certificate -->
+                 <div class="w-25 d-flex flex-column">
+                   <p class="small-font">Registration certificate</p>
+                   <ngx-dropzone (change)="onSelect($event, 'Registration certificate')"
+                     class="justify-content-center my-4" [multiple]="false"
+                     accept="image/jpeg,image/jpg,image/png,image/gif">
+                     <ngx-dropzone-label>
+                       <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                       <p class="text-medium-light pt-2">Click here to upload</p>
+                     </ngx-dropzone-label>
+                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                       *ngFor="let f of registrationCertificateFiles" [file]="f" [removable]="true"
+                       (removed)="onRemove(f, 'Registration certificate')">
+                     </ngx-dropzone-image-preview>
+                   </ngx-dropzone>
+                   <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                     <mat-label>Registered owner name</mat-label>
+                     <input matInput placeholder="Registered  owner name">
+                   </mat-form-field>
+                   <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                     <mat-label>Registration date</mat-label>
+                     <input matInput [matDatepicker]="registration_date">
+                     <mat-datepicker-toggle matSuffix [for]="registration_date">
+                       <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                     </mat-datepicker-toggle>
+                     <mat-datepicker #registration_date></mat-datepicker>
+                   </mat-form-field>
+                   <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                     <mat-label>Expiry date</mat-label>
+                     <input matInput [matDatepicker]="expiry_date">
+                     <mat-datepicker-toggle matSuffix [for]="expiry_date">
+                       <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                     </mat-datepicker-toggle>
+                     <mat-datepicker #expiry_date></mat-datepicker>
+                   </mat-form-field>
+                 </div>
+                 <!-- Fitness certificate -->
+                 <div class="w-25 d-flex flex-column">
+                   <p class="small-font">Fitness certificate</p>
+                   <ngx-dropzone (change)="onSelect($event, 'Fitness certificate')" class="justify-content-center my-4"
+                     [multiple]="false" accept="image/jpeg,image/jpg,image/png,image/gif">
+                     <ngx-dropzone-label>
+                       <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                       <p class="text-medium-light pt-2">Click here to upload</p>
+                     </ngx-dropzone-label>
+                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                       *ngFor="let f of fitnessCertificateFiles" [file]="f" [removable]="true"
+                       (removed)="onRemove(f,'Fitness certificate')">
+                     </ngx-dropzone-image-preview>
+                   </ngx-dropzone>
+                   <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                     <mat-label>FC number</mat-label>
+                     <input matInput placeholder="FC number">
+                   </mat-form-field>
+                   <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                     <mat-label>Expiry date</mat-label>
+                     <input matInput [matDatepicker]="fcexpiry_date">
+                     <mat-datepicker-toggle matSuffix [for]="fcexpiry_date">
+                       <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                     </mat-datepicker-toggle>
+                     <mat-datepicker #fcexpiry_date></mat-datepicker>
+                   </mat-form-field>
+                 </div>
+                 <!-- Emission test -->
+                 <div class="w-25 d-flex flex-column">
+                   <p class="small-font ">Emission test(PUC)</p>
+                   <ngx-dropzone (change)="onSelect($event, 'Emission test')" class="justify-content-center my-4"
+                     [multiple]="false" accept="image/jpeg,image/jpg,image/png,image/gif">
+                     <ngx-dropzone-label>
+                       <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                       <p class="text-medium-light pt-2">Click here to upload</p>
+                     </ngx-dropzone-label>
+                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of emissionTestFiles"
+                       [file]="f" [removable]="true" (removed)="onRemove(f, 'Emission test')">
+                     </ngx-dropzone-image-preview>
+                   </ngx-dropzone>
+                   <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                     <mat-label>Number</mat-label>
+                     <input matInput placeholder="Number">
+                   </mat-form-field>
+                   <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                     <mat-label>Expiry date</mat-label>
+                     <input matInput [matDatepicker]="emission_expiry_date">
+                     <mat-datepicker-toggle matSuffix [for]="emission_expiry_date">
+                       <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                     </mat-datepicker-toggle>
+                     <mat-datepicker #emission_expiry_date></mat-datepicker>
+                   </mat-form-field>
+                 </div>
+               </div>
+             </div>
+             <!-- Road tax -->
+             <div class="border-bottom pt-5">
+               <p class="pb-2 font-medium2">Road tax</p>
+               <div class="d-flex justify-content-between mt-4 mb-5 form-padding">
+                 <div class="four-input-fields mr-4">
+                   <ngx-dropzone (change)="onSelect($event, 'Road tax')" class="justify-content-center"
+                     [multiple]="false" accept="image/jpeg,image/jpg,image/png,image/gif">
+                     <ngx-dropzone-label>
+                       <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                       <p class="text-medium-light pt-2">Click here to upload</p>
+                     </ngx-dropzone-label>
+                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of roadTaxFiles"
+                       [file]="f" [removable]="true" (removed)="onRemove(f, 'Road tax')">
+                     </ngx-dropzone-image-preview>
+                   </ngx-dropzone>
+                 </div>
+                 <div class="w-75">
+                   <mat-form-field appearance="outline" class="px-5" style="width: 45% !important;">
+                     <mat-label>EMI Amount</mat-label>
+                     <input matInput placeholder="Driver name">
+                   </mat-form-field>
+                 </div>
+               </div>
+             </div>
+             <!-- Insurance -->
+             <div class="border-bottom pt-5">
+               <p class="pb-2 font-medium2">Insurance</p>
+               <div class="d-flex justify-content-between mt-4 mb-5 form-padding">
+                 <div class="four-input-fields">
+                   <ngx-dropzone (change)="onSelect($event, 'Insurance')" class="justify-content-center"
+                     [multiple]="false" accept="image/jpeg,image/jpg,image/png,image/gif">
+                     <ngx-dropzone-label>
+                       <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                       <p class="text-medium-light pt-2">Click here to upload</p>
+                     </ngx-dropzone-label>
+                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of insuranceFiles"
+                       [file]="f" [removable]="true" (removed)="onRemove(f, 'Insurance')">
+                     </ngx-dropzone-image-preview>
+                   </ngx-dropzone>
+                 </div>
+                 <div style="width: 72% !important;">
+                   <div class="justify-content-around d-flex">
+                     <mat-form-field appearance="outline" class="four-input-fields px-3">
+                       <mat-label>Company name</mat-label>
+                       <input matInput placeholder="Company name">
+                     </mat-form-field>
+                     <mat-form-field appearance="outline" class="four-input-fields px-3">
+                       <mat-label>Policy number</mat-label>
+                       <input matInput placeholder="Policy number">
+                     </mat-form-field>
+                     <mat-form-field appearance="outline" class="four-input-fields px-3">
+                       <mat-label>Issue date</mat-label>
+                       <input matInput [matDatepicker]="issue_date">
+                       <mat-datepicker-toggle matSuffix [for]="issue_date">
+                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                       </mat-datepicker-toggle>
+                       <mat-datepicker #issue_date></mat-datepicker>
+                     </mat-form-field>
+                   </div>
+                   <div class="d-flex justify-content-around text-left">
+                     <mat-form-field appearance="outline" class="four-input-fields px-3">
+                       <mat-label>Due date</mat-label>
+                       <input matInput [matDatepicker]="due_date">
+                       <mat-datepicker-toggle matSuffix [for]="due_date">
+                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                       </mat-datepicker-toggle>
+                       <mat-datepicker #due_date></mat-datepicker>
+                     </mat-form-field>
+                     <mat-form-field appearance="outline" class="four-input-fields px-3">
+                       <mat-label>Premium amount</mat-label>
+                       <input matInput placeholder="Premium amount">
+                     </mat-form-field>
+                     <mat-form-field appearance="outline" class="four-input-fields px-3">
+                       <mat-label>Cover amount</mat-label>
+                       <input matInput placeholder="Cover amount">
+                     </mat-form-field>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <!-- RTO -->
+             <div class="pt-5">
+               <p class="pb-2 font-medium2">RTO</p>
+               <div class="d-flex justify-content-between my-4 form-padding">
+                 <mat-form-field appearance="outline" class="three-input-fields ">
+                   <mat-label>Registration state</mat-label>
+                   <mat-select>
+                     <mat-option *ngFor="let day of days" [value]="day">{{day}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="three-input-fields  ">
+                   <mat-label>RTO Office</mat-label>
+                   <mat-select>
+                     <mat-option *ngFor="let day of days" [value]="day">{{day}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" style="opacity: 0;" class="three-input-fields">
+                   <mat-label>Vehicle model</mat-label>
+                   <input matInput placeholder="Vehicle model" [disabled]="true">
+                 </mat-form-field>
+               </div>
+
+             </div>
+             <div class="text-center pt-5">
+               <button class="btn btn-lg buttonLarge">
+                 ADD NEW VEHICLE
+               </button>
+             </div>
+             <!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->
+
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ 

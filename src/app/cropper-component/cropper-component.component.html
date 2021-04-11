@@ -1,0 +1,36 @@
+<!-- <button ly-button color="primary" (click)="_fileInput.click()">
+
+  <span>Select File</span>
+</button> -->
+<input #_fileInput type="file" (change)="cropper.selectInputEvent($event)" accept="image/*" hidden>
+<!-- <button raised ly-button bg="accent" *ngIf="croppedImage">Upload</button> -->
+
+<ly-img-cropper [withClass]="classes.cropper" [config]="myConfig" [(scale)]="scale" (minScale)="minScale = $event"
+  (ready)="ready = true" (cleaned)="ready = false" (cropped)="onCropped($event)" (loaded)="onLoaded($event)"
+  (error)="onError($event)">
+  <span>Drag and drop image</span>
+</ly-img-cropper>
+
+<div *ngIf="ready" [className]="classes.sliderContainer">
+  <ly-slider [thumbVisible]="false" [min]="minScale" [max]="1" [(ngModel)]="scale" (input)="scale = $event.value"
+    [step]=00000.1></ly-slider>
+</div>
+
+<div>
+  <h3 (click)="close();">
+    CANCEL
+  </h3>
+  <h3 (click)="cropper.crop()" (click)="upload();">
+    UPLOAD
+  </h3>
+</div>
+
+<!-- <button *ngIf="ready" color="accent" (click)="cropper.crop()" ly-button>
+  crop
+</button> -->
+
+<!-- <div>
+  <img *ngIf="croppedImage" [src]="croppedImage">
+</div>
+
+<button mat-button mat-dialog-close (click)="close();">Close</button> -->

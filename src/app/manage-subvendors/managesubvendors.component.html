@@ -1,0 +1,274 @@
+<div style="padding: 3rem;" *ngIf="outlet.isActivated == false">
+
+  <div class="row no-gutters">
+    <div class="col-12 d-flex my-auto justify-content-between">
+      <div>
+        <div class="d-flex">
+          <p class="breadCrumbs-small" [routerLink]="['/sidenav/bookings']">Home</p>
+          <p class="breadCrumbs-small pl-4" (click)="toggleManageSubvendors()"
+            [ngClass]="toggleManageSubVendorBreadcrumb?'d-block':'d-none'">Manage sub-vendor</p>
+        </div>
+        <div>
+          <p class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleManageVendorHeading?'d-block':'d-none'">
+            Manage sub-vendors
+          </p>
+          <p class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleAddVendorHeading?'d-block':'d-none'">
+            Add new vendor
+          </p>
+          <p class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleVendorName?'d-block':'d-none'">
+            {{subvendorName}}
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn btn-lg buttonLarge" (click)="addNewSubvendor();"
+          [ngClass]="toggleAddSubVendorButton?'d-block':'d-none'">ADD NEW VENDOR</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Cards -->
+  <div class="row no-gutters mt-5" [ngClass]="toggleCards?'d-flex':'d-none'">
+    <div class="col-12 col-md-12 col-lg-4 p-3" *ngFor="let subvendor of subvendorsData">
+      <div class="card p-4 d-flex flex-row" (click)="veiwSubVendorDetails(subvendor)">
+        <img src="{{subvendor.image}}" class="my-auto" style="border-radius: 50%;height: 10vh;width: auto;" alt="">
+        <div style="width: 100%;align-self: center;" class="font-medium2 p-4">{{subvendor.subvendorName}}</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Add new subvenddor -->
+
+  <div [ngClass]="toggleAddNewVendor?'d-block':'d-none'">
+    <form class="example-form ">
+      <mat-form-field class="example-full-width w-100">
+        <mat-label>Message</mat-label>
+        <input matInput #message maxlength="256" placeholder="Search for vendor by name" [formControl]="myControl"
+          [matAutocomplete]="auto" (keydown.enter)="navigateAddNewVendor()">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+
+
+  <!-- View details -->
+  <div class="row no-gutters mt-5">
+    <div class="col">
+      <div class="container-fluid p-5 " [ngClass]="toggleSubVendorDetails?'d-block':'d-none'">
+        <div class="d-flex justify-content-between">
+          <div class="title-medium">
+            Profile settings
+          </div>
+          <button class="btn btn-sm close d-inline" (click)="closeSubvendorDetails();">
+            CLOSE X
+          </button>
+        </div>
+        <!-- Basic information -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Basic information</p>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <div class="w-25 ">
+              <div class="w-25">
+                <img src="{{profilePic}}" style="border-radius: 50%;" alt="">
+              </div>
+            </div>
+            <div class="w-75">
+              <div class="d-flex justify-content-between my-4">
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Sub-vendor name</mat-label>
+                  <input matInput style="font-size: 1rem !important;" placeholder="Sub-vendor name" [(ngModel)]="subvendorName"
+                    [disabled]="isDisabled?'true':'false'">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Website</mat-label>
+                  <input matInput placeholder="Website" [(ngModel)]="website" [disabled]="isDisabled?'true':'false'">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Email address</mat-label>
+                  <input matInput placeholder="Email address" [(ngModel)]="emailAddress"
+                    [disabled]="isDisabled?'true':'false'">
+                </mat-form-field>
+              </div>
+              <div class="d-flex justify-content-between my-4 form-padding">
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Contact number</mat-label>
+                  <input matInput placeholder="Contact number" [(ngModel)]="contactNumber"
+                    [disabled]="isDisabled?'true':'false'">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Contact person name</mat-label>
+                  <input matInput placeholder="Contact person name" [(ngModel)]="contactPersonName"
+                    [disabled]="isDisabled?'true':'false'">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>State</mat-label>
+                  <mat-select [disabled]="isDisabled?'true':'false'">
+                    <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Billing and tax -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Billing and tax </p>
+          <div class="d-flex justify-content-between my-4">
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>PAN number</mat-label>
+              <input matInput placeholder="PAN number" [(ngModel)]="panNumber" [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>GST type</mat-label>
+              <input matInput placeholder="GST type" [(ngModel)]="gstType" [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>GSTIN number</mat-label>
+              <input matInput placeholder="GSTIN number" [(ngModel)]="gstinNumber"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Service tax number</mat-label>
+              <input matInput placeholder="Service tax number" [(ngModel)]="serviceTaxNumber"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-4">
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Reverse charge applicable</mat-label>
+              <mat-select [disabled]="isDisabled?'true':'false'">
+                <mat-option *ngFor="let answer of conditional" [value]="answer">{{answer}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>TDS%</mat-label>
+              <input matInput placeholder="TDS%" type="number" [(ngModel)]="tds" [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Revenue share%</mat-label>
+              <input matInput placeholder="Revenue share%" type="number" [(ngModel)]="revenueShare"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Tax classification for purchase order</mat-label>
+              <input matInput placeholder="Tax classification for purchase order" [(ngModel)]="taxClassification"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Tax applicable</mat-label>
+              <mat-select [disabled]="isDisabled?'true':'false'">
+                <mat-option *ngFor="let tax of taxes" [value]="tax">{{tax}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Billing name</mat-label>
+              <input matInput placeholder="Billing name" [(ngModel)]="billingName"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Billing address</mat-label>
+              <input matInput placeholder="Billing address" [(ngModel)]="billingAddress"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>State</mat-label>
+              <mat-select [disabled]="isDisabled?'true':'false'">
+                <mat-option *ngFor="let state of states" value="state">
+                  {{state}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <!-- Driver allowance settings -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Driver allowances settings </p>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Early time</mat-label>
+              <input matInput placeholder="Early time" type="number" [(ngModel)]="earlyTime"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>late time</mat-label>
+              <input matInput placeholder="Early time" type="number" [(ngModel)]="lateTime"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="opacity: 0;" class="four-input-fields">
+              <mat-label>Early time</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="opacity: 0;" class="four-input-fields">
+              <mat-label>late time</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Bank details -->
+        <div class="pt-5">
+          <p class="pb-2 font-medium2">Bank accounts</p>
+          <div class="d-flex justify-content-between my-4">
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Account holder name</mat-label>
+              <input matInput placeholder="Account holder name" [(ngModel)]="accountHolderName"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Account number</mat-label>
+              <input matInput placeholder="Account number" [(ngModel)]="accountNumber"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Bank name</mat-label>
+              <input matInput placeholder="Bank name" [(ngModel)]="bankName" [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Bank branch</mat-label>
+              <input matInput placeholder="Bank branch" [(ngModel)]="bankBranch" [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>IFSC code</mat-label>
+              <input matInput placeholder="IFSC code" [(ngModel)]="ifscCode" [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Cheques in name of</mat-label>
+              <input matInput placeholder="Cheques in name of" [(ngModel)]="chequeName"
+                [disabled]="isDisabled?'true':'false'">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields" style="opacity: 0;">
+              <mat-label>Cheques in name of</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields" style="opacity: 0;">
+              <mat-label>Cheques in name of</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="text-center pt-4">
+          <button class="btn btn-lg buttonLarge" (click)="onEdit();">
+            EDIT DETAILS
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<router-outlet #outlet="outlet"></router-outlet>

@@ -1,0 +1,21 @@
+.image-style {
+  text-align: center;
+  border-radius: 50%;
+  background-color: #F0F3F7;
+  
+}
+
+/* .cards {
+  width: 85% !important;
+  cursor: pointer;
+} */
+
+.card {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0rem 0.25rem 0.75rem #0000001A;
+  border-radius: 0.8rem !important;
+  opacity: 1;
+  border: none;
+  cursor: pointer;
+  max-width: 29rem;
+}

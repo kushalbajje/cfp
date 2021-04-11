@@ -1,0 +1,160 @@
+<div class="p-5">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-12 col-lg-12">
+      <p class="breadCrumbs-small" (click)="navigateHome();">Home</p>
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-12 d-flex justify-content-between">
+      <div>
+        <p class="breadCrumbs-large">Payments</p>
+      </div>
+      <div class="d-flex justify-content-around">
+        <mat-card class=" mx-4">
+          <mat-card-subtitle>Amount received</mat-card-subtitle>
+          <mat-card-content>
+            <p class="title-medium">
+              ₹45000
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class=" mx-4">
+          <mat-card-subtitle>Outstanding balance</mat-card-subtitle>
+          <mat-card-content>
+            <p class="title-medium">
+              ₹45000
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class=" mx-4">
+          <mat-card-subtitle>Total amount</mat-card-subtitle>
+          <mat-card-content>
+            <p class="title-medium">
+              ₹90000
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <mat-grid-list cols="4" rowHeight="120px" gutterSize="10px" style="margin-top: 2rem;">
+    <mat-grid-tile class="first" [colspan]="3" [rowspan]="3" style="align-self:flex-start !important ;">
+      <div class="row no-gutters p-3">
+        <div class="col-12 col-md-12 col-lg-12 d-flex justify-content-between align-items-center">
+          <div class="font-medium2 ">
+            Payments
+          </div>
+          <mat-button-toggle-group #colorToggle="matButtonToggleGroup" value="Today" aria-label="Change color">
+            <mat-button-toggle value="Today" (click)="toggleData('Today')"> Today </mat-button-toggle>
+            <mat-button-toggle value="Month" (click)="toggleData('Month')"> Month </mat-button-toggle>
+            <mat-button-toggle value="Year" (click)="toggleData('Year')"> Year </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <hr>
+      <div style="height: 100%;width: 100%;">
+        <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="labels" [options]="chartOptions"
+          [legend]="true" [colors]="colors" (chartClick)="onChartClick($event)"
+          style="max-height: 80% !important;padding: 1rem;">
+        </canvas>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="rest" [colspan]="1" [rowspan]="1" (click)="navigatePaymentsType('business');">
+      <div class="row no-gutters">
+        <div class="col-3 col-md-3 col-lg-3">
+          <img src="../../assets/images/business_payments.svg" alt="">
+        </div>
+        <div class="col-9 col-md-9 col-lg-9 small-font-2 align-self-center">
+          Business payments
+        </div>
+      </div>
+
+    </mat-grid-tile>
+    <mat-grid-tile class="rest" [colspan]="1" [rowspan]="1" (click)="navigatePaymentsType('subvendor');">
+      <div class="row no-gutters">
+        <div class="col-12 col-md-3 col-lg-3">
+          <img src="../../assets/images/subvendor_payments.svg" alt="">
+        </div>
+        <div class="col-12 col-md-9 col-lg-9 small-font-2 align-self-center">
+          Sub-vendor payments
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="rest" [colspan]="1" [rowspan]="1" (click)="navigatePaymentsType('driver');">
+      <div class="row no-gutters my-auto">
+        <div class="col-12 col-md-3 col-lg-3">
+          <img src="../../assets/images/driver_payments.svg" alt="">
+        </div>
+        <div class="col-12 col-md-9 col-lg-9 small-font-2 align-self-center">
+          Driver payments
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="row no-gutters mt-5">
+    <!-- <div class="col-12 col-md-4 col-lg-14 mr-4">
+      <div class="row no-gutters">
+        <div class="col-12 d-flex justify-content-between">
+          <p class="font-medium">Business payments</p>
+          <p class="small-font align-self-center">View all</p>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-12 col-md-12 col-lg-12" *ngFor='let pay of businessPayments'>
+            <div class="card py-2 my-2">
+              <div class="row no-gutters">
+                <div class="col-2 col-md-2 col-lg-2 align-self-center businessPartner text-center">
+                  <img src="{{pay.image}}" alt="logo" style="height:6vh; width: auto;">
+                </div>
+                <div class="col-7 col-md-7 col-lg-7">
+                  <div>
+                    <p class="small-font">{{pay.companyName}}</p>
+                  </div>
+                  <div>
+                    <p class="light-small-font">{{pay.paymentDetails}}</p>
+                  </div>
+                </div>
+                <div class="col-3 col-md-3 col-lg-3 align-self-center">
+                  <div class="title-small">
+                    {{pay.amount}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-12 col-md-4 col-lg-14 ml-4">
+      <div class="row no-gutters">
+        <div class="col-12 d-flex justify-content-between">
+          <p class="font-medium">Transactions history</p>
+          <p class="small-font align-self-center">View all</p>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-12 col-md-12 col-lg-12" *ngFor='let pay of transactionHistory'>
+            <div class="card py-2 my-2">
+              <div class="row no-gutters">
+                <div class="col-2 col-md-2 col-lg-2 align-self-center businessPartner text-center">
+                  <img src="{{pay.image}}" alt="logo" style="height:6vh; width: auto;">
+                </div>
+                <div class="col-6 col-md-6 col-lg-6">
+                  <div>
+                    <p class="small-font">{{pay.companyName}}</p>
+                  </div>
+                  <div>
+                    <p class="dark-small-font">{{pay.amount}}</p>
+                  </div>
+                </div>
+                <div class="col-4 col-md-4 col-lg-4 align-self-center">
+                  <div class="light-small-font">
+                    {{pay.paymentDetails}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

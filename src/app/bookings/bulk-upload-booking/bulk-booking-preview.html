@@ -1,0 +1,377 @@
+<div [ngClass]="toggleViewDetails?'d-none':'d-block'" style="max-height: 80vh;overflow: auto;height: auto;">
+  <h1 class="float-left">Preview booking</h1>
+  <button class="close float-right" (click)="closeDialog();">CLOSE X</button>
+  <div class="mat-typography">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0" class="px-1">
+
+      <!-- Position Column -->
+      <!-- <ng-container matColumnDef="slNo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No </th>
+        <td mat-cell *matCellDef="let element"> {{element.slNo}} </td>
+      </ng-container> -->
+      <ng-container matColumnDef="slNo">
+        <th mat-header-cell *matHeaderCellDef>Sl No </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="businessName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Company name </th>
+        <td mat-cell *matCellDef="let element"> {{element.businessName}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="vehicleType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Vehicle type</th>
+        <td mat-cell *matCellDef="let element"> {{element.vehicleType}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="rideType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ride type </th>
+        <td mat-cell *matCellDef="let element"> {{element.rideType}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="pickupDateAndTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Pickup date and time</th>
+        <td mat-cell *matCellDef="let element"> {{element.pickupDateAndTime}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <button class="btn btn-sm buttonSmall mx-3" (click)="viewDeatils(element)">
+            VIEW DETAILS
+          </button>
+          <button class="btn btn-sm buttonSmall mx-3" (click)="removeBooking(element)">
+            REMOVE FROM LIST
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div class="pt-5">
+    <button class="btn buttonLarge float-right" [mat-dialog-close]="true" cdkFocusInitial>ADD BOOKINGS</button>
+  </div>
+</div>
+
+<div [ngClass]="toggleViewDetails?'d-block':'d-none'" style="height: 80vh;overflow: auto;">
+
+  <div class="row">
+    <div class="col-12 d-flex justify-content-between align-self-center">
+      <h1 class="pt-3">
+        View booking details
+      </h1>
+      <div>
+        <button class="btn buttonMedium mr-3" style="padding-top:0.7rem;  padding-bottom: 0.7rem;"
+          (click)="removeBooking('remove')">
+          REMOVE BOOKING
+        </button>
+        <button class="close" (click)="goBack()">
+          BACK
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row no-gutters">
+    <div class="col-12">
+      <div class="container-fluid pt-5">
+
+        <div class="d-flex justify-content-between my-2">
+          <mat-form-field appearance="outline" class="four-input-fields ">
+            <mat-label>Company name</mat-label>
+            <mat-select [(value)]="company_name" [formControl]="companyNameFormControl">
+              <mat-option *ngFor="let company of company_list" [value]="company.company_id">{{company.company_name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyNameFormControl.hasError('required')">
+              <h4>Please select company name</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="four-input-fields ">
+            <mat-label>Rider name</mat-label>
+            <input matInput placeholder="Rider name" [formControl]="riderNameFormControl" [(ngModel)]="consumer_name">
+            <mat-error *ngIf="riderNameFormControl.hasError('required')">
+              <h4>Please enter rider name</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="four-input-fields ">
+            <mat-label>Rider phone number</mat-label>
+            <input matInput placeholder="Rider phone number" [formControl]="mobileNumber"
+              [(ngModel)]="consumer_phone_number">
+            <mat-error *ngIf="mobileNumber.hasError('pattern') && (mobileNumber.touched || mobileNumber.dirty)">
+              <h4>Enter a valid mobile number</h4>
+            </mat-error>
+            <mat-error *ngIf="mobileNumber.hasError('required')">
+              <h4> Please enter the valid mobile number </h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="four-input-fields ">
+            <mat-label>Rider email</mat-label>
+            <input matInput placeholder="Rider email" [formControl]="emailFormControl" [(ngModel)]="consumer_email">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              <h2>Please enter a valid email address</h2>
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              <h4>Email is required</h4>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="d-flex justify-content-between my-2">
+          <mat-form-field appearance="outline" class="three-input-fields ">
+            <mat-label>Ride type</mat-label>
+            <mat-select [(value)]="rideType" [formControl]="rideTypeFormControl">
+              <mat-option *ngFor="let ride of ride_type" [value]="ride">{{ride}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="rideTypeFormControl.hasError('required')">
+              <h4>Please select the ride type</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields">
+            <mat-label>Select pickup location</mat-label>
+            <input matInput placeholder="Select pickup location" [formControl]="pickupLocFormControl"
+              (click)="getLocation('pickup');" [(ngModel)]="pickupLocation">
+            <!-- <mat-icon [inline]="true" style="font-size: 2.2rem; text-transform: none;" matSuffix>add_box</mat-icon> -->
+            <mat-error *ngIf="pickupLocFormControl.hasError('required')">
+              <h4>Please select the pickup location</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields" *ngIf="rideType != 'Rental'">
+            <mat-label>Select drop location</mat-label>
+            <input matInput placeholder="Select drop location" [formControl]="dropOffLocFromControl"
+              (click)="getLocation('dropOff');" [(ngModel)]="dropOffLocation">
+            <!-- <mat-icon [inline]="true" style="font-size: 2.2rem;" matSuffix>add_box</mat-icon> -->
+            <mat-error *ngIf="dropOffLocFromControl.hasError('required')">
+              <h4>Please select the destination location</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields" style="opacity: 0;"
+            *ngIf="rideType == 'Rental'">
+            <input matInput placeholder="Select pickup location" [disabled]="true">
+            <mat-icon [inline]="true" style="font-size: 2.2rem;" matSuffix>add_box</mat-icon>
+
+          </mat-form-field>
+        </div>
+
+        <div class="d-flex justify-content-between my-2">
+          <mat-form-field appearance="outline" class="three-input-fields">
+            <mat-label>Pick-up date & time</mat-label>
+            <input matInput [ngxMatDatetimePicker]="picker" placeholder="Pick-up date & time"
+              [formControl]="pickupTimeFromControl" [disabled]="disabled" (click)="picker.open();"
+              [(ngModel)]="pickupTime">
+            <mat-datepicker-toggle matSuffix [for]="$any(picker)" style="font-size: 1.2rem;"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker [showSeconds]="showSeconds" [stepHour]="stepHour" [stepMinute]="stepMinute"
+              [stepSecond]="stepSecond">
+            </ngx-mat-datetime-picker>
+            <mat-error *ngIf="pickupTimeFromControl.hasError('required')">
+              <h4>Please select pickup time</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields" *ngIf="rideType == 'Rental'">
+            <mat-label>Package type</mat-label>
+            <mat-select [(value)]="packageType" [formControl]="packageTypeFormControl">
+              <mat-option *ngFor="let type of package_type" [value]="type">{{type}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="packageTypeFormControl.hasError('required')">
+              <h4>Please select package type</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields" *ngIf="rideType == 'Outstation'">
+            <mat-label>Trip type</mat-label>
+            <mat-select [(value)]="tripType" [formControl]="tripTypeFormControl">
+              <mat-option *ngFor="let type of travel_type" [value]="type">{{type}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="tripTypeFormControl.hasError('required')">
+              <h4>Please select trip type</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields">
+            <mat-label>Vehicle type</mat-label>
+            <mat-select [(value)]="vehicleType" [formControl]="vehicleTypeFormControl">
+              <mat-option *ngFor="let type of vehicle_type" [value]="type">{{type}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="vehicleTypeFormControl.hasError('required')">
+              <h4>Please select vehicle type</h4>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields" style="opacity: 0;"
+            *ngIf="(rideType == 'Airport') || (rideType == 'Urban') || (rideType == null) || (rideType == '')">
+            <mat-label>Select second pickup location</mat-label>
+            <input matInput placeholder="Select pickup location" [disabled]="true">
+            <mat-icon [inline]="true" style="font-size: 2.2rem;" matSuffix>add_box</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="my-3">
+          <mat-radio-group required aria-label="Select an option" [(value)]="fareCalculationType">
+            <mat-radio-button value="garage to garage" class="pr-3">Garage to garage calculation</mat-radio-button>
+            <mat-radio-button value="point to point">Point to point calculation</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+        <div *ngIf="(rideType == 'Airport') || (rideType == 'Urban')">
+          <div class="my-4 pt-4  ">
+            <p class="font-medium2 mb-4">Airport</p>
+
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="pricing" (ngModelChange)="setValue()">
+              <mat-radio-button value="1" class="pr-3" [disabled]="isFareAutoCalculated?'false':'true'">Auto calculate
+                pricing</mat-radio-button>
+              <mat-radio-button value="2" class=" " [checked]="true">Custom pricing</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="three-input-fields">
+              <mat-label>price</mat-label>
+              <input matInput placeholder="Price" [formControl]="packageCostFormControl" [(ngModel)]="packageCost">
+              <mat-error *ngIf="packageCostFormControl.hasError('required')">
+                <h4>Please enter package cost</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields">
+              <mat-label>Extra Km</mat-label>
+              <input matInput placeholder="Extra Km" [formControl]="additionalKmCostFormControl"
+                [(ngModel)]="airportAdditionalKilometers">
+              <mat-error *ngIf="additionalKmCostFormControl.hasError('required')">
+                <h4>Please enter additional km cost</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields" style="opacity: 0;">
+              <mat-label>Rider phone number</mat-label>
+              <input matInput placeholder="Rider phone number" [disabled]="true">
+            </mat-form-field>
+          </div>
+          <div class="my-2 d-none">
+            <mat-checkbox class="small-font" matTooltip="auto assign" matTooltipPosition="right">
+              Automatically assign available drivers
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <div *ngIf="rideType == 'Rental'">
+          <div class="my-4 pt-4  ">
+            <p class="font-medium2 mb-4">Rental</p>
+
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="pricing" (ngModelChange)="setValue()">
+              <mat-radio-button value="1" class="pr-3" [disabled]="isFareAutoCalculated?'false':'true'">Auto calculate
+                pricing</mat-radio-button>
+              <mat-radio-button value="2" class=" " [checked]="true">Custom pricing</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="three-input-fields  ">
+              <mat-label>Package cost</mat-label>
+              <input matInput placeholder="package cost" [formControl]="packageCostFormCOntrol"
+                [(ngModel)]="packageCost">
+              <mat-error *ngIf="packageCostFormCOntrol.hasError('required')">
+                <h4>Please enter package cost</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields  ">
+              <mat-label>Additional Kilometers cost</mat-label>
+              <input matInput placeholder="Additional Kilometers cost" [formControl]="additionalKmCostFormControl"
+                [(ngModel)]="rentalAdditionalKilometersCost">
+              <mat-error *ngIf="additionalKmCostFormControl.hasError('required')">
+                <h4>Please enter additional km cost</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields  ">
+              <mat-label>Additional hours cost</mat-label>
+              <input matInput placeholder="Additional hours cost" [formControl]="additionalHoursCostFormControl"
+                [(ngModel)]="rentalAddditionalHoursCost">
+              <mat-error *ngIf="additionalHoursCostFormControl.hasError('required')">
+                <h4>Please enter additional hours cost</h4>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="my-2 d-none">
+            <mat-checkbox class="small-font" matTooltip="auto assign" matTooltipPosition="right">
+              Automatically assign available drivers
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <div *ngIf="rideType == 'Outstation'">
+          <div class="my-4 pt-4  ">
+            <p class="font-medium2 mb-4">Outstation</p>
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="pricing" (ngModelChange)="setValue()">
+              <mat-radio-button value="1" class="pr-3" [disabled]="isFareAutoCalculated?'false':'true'">Auto calculate
+                pricing</mat-radio-button>
+              <mat-radio-button value="2" class=" " [checked]="true">Custom pricing</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <mat-form-field appearance="outline" class="five-input-fields">
+              <mat-label>Price</mat-label>
+              <input matInput placeholder="Price" [formControl]="packageCostFormControl" [(ngModel)]="packageCost">
+              <mat-error *ngIf="packageCostFormControl.hasError('required')">
+                <h4>Please enter package cost</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="five-input-fields">
+              <mat-label>Minimum km per day</mat-label>
+              <input matInput placeholder="Minimum km per day" [formControl]="minimumKmPerDayFormControl"
+                [(ngModel)]="outstationMinimumKmPerDay">
+              <mat-error *ngIf="minimumKmPerDayFormControl.hasError('required')">
+                <h4>Please enter minimum km per day</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="five-input-fields">
+              <mat-label>Rate per km</mat-label>
+              <input matInput placeholder="Rate per km" [formControl]="perKmCostFormControl"
+                [(ngModel)]="outstationRatePerKm">
+              <mat-error *ngIf="perKmCostFormControl.hasError('required')">
+                <h4>Please enter per km cost</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="five-input-fields">
+              <mat-label>Driver bata charge(day)</mat-label>
+              <input matInput placeholder="Driver bata charge(day)" [formControl]="dayBataFormControl"
+                [(ngModel)]="outstationDayBataCharge">
+              <mat-error *ngIf="dayBataFormControl.hasError('required')">
+                <h4>Please enter day bata cost</h4>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="five-input-fields">
+              <mat-label>Driver bata charge(night)</mat-label>
+              <input matInput placeholder="Driver bata charge(night)" [formControl]="nightBataFormControl"
+                [(ngModel)]="outstationNightBataCharge">
+              <mat-error *ngIf="nightBataFormControl.hasError('required')">
+                <h4>Please enter night bata cost</h4>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="my-2 d-none">
+            <mat-checkbox class="small-font" matTooltip="auto assign" matTooltipPosition="right">
+              Automatically assign available drivers
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <div class="text-center pt-5">
+          <button class="btn btn-lg buttonLarge" (click)="onUpdate();">
+            UPDATE BOOKING
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

@@ -1,0 +1,168 @@
+<div class="pt-5 px-5">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-12 col-lg-12 my-auto">
+      <div class="d-flex">
+        <p class="breadCrumbs-small" (click)="navigateHome();">Home</p>
+        <p class="breadCrumbs-small pl-4" (click)="navigatePayments();">Payments</p>
+        <p class="breadCrumbs-small pl-4" [ngClass]="toggleViewTrips?'d-block':'d-none'" (click)="closeViewAttendance();">
+          Driver payments</p>
+      </div>
+      <div class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleViewTrips?'d-none':'d-block'">
+        Driver payments
+      </div>
+      <div class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleViewTrips?'d-block':'d-none'">
+        {{subvendorName}}
+      </div>
+      <div class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleDatePicker?'d-none':'d-block'">
+        View driver attendance
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters" [ngClass]="toggleDatePicker?'d-block':'d-none'">
+    <div class="col-12 col-md-12 col-lg-12 ">
+      <mat-form-field class="no-line date" appearance="outline">
+        <input matInput [matDatepicker]="myDatePicker" [formControl]="date1" (click)="myDatePicker.open();"
+          [disabled]="true">
+        <img src="../../assets/images/calendar.svg" alt="" (click)="myDatePicker.open();" matPrefix
+          class="mr-5 align-self-center">
+        <mat-datepicker mat-hide-icons="calenda"></mat-datepicker>
+        <mat-datepicker #myDatePicker [disabled]="false"></mat-datepicker>
+      </mat-form-field>
+      <button class="btn-sm buttonSmall calender-button px-3 py-2 " (click)="prevDay();">
+        <img src="../../assets/images/previous.svg" alt="">
+      </button>
+      <button class="btn-sm buttonSmall calender-button px-3 py-2 ml-2" (click)="nextDay();">
+        <img src="../../assets/images/next.svg" alt="">
+      </button>
+    </div>
+  </div>
+  <div class="row no-gutters" [ngClass]="toggleViewTrips?'d-none':'d-block'">
+    <div class="col-12">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0 px-1 data-table">
+
+        <!-- Business name Column -->
+        <ng-container matColumnDef="driverName">
+          <th class="data-table-th" mat-header-cell *matHeaderCellDef mat-sort-header> Driver name </th>
+          <td class="data-table-td" mat-cell *matCellDef="let element"> {{element.driverName}} </td>
+        </ng-container>
+
+        <!-- Trips completed Column -->
+        <ng-container matColumnDef="driverPhoneNumber">
+          <th class="data-table-th" mat-header-cell *matHeaderCellDef mat-sort-header>Driver phone number</th>
+          <td class="data-table-td" mat-cell *matCellDef="let element"> {{element.driverPhoneNumber}} </td>
+        </ng-container>
+
+        <!--  Total amount Column -->
+        <ng-container matColumnDef="totalDaysPresent">
+          <th class="data-table-th" mat-header-cell *matHeaderCellDef mat-sort-header> Total days present </th>
+          <td class="data-table-td" mat-cell *matCellDef="let element"> {{element.totalDaysPresent}} </td>
+        </ng-container>
+
+        <!--  Total amount Column -->
+        <ng-container matColumnDef="totalAmount">
+          <th class="data-table-th" mat-header-cell *matHeaderCellDef mat-sort-header> Total amount </th>
+          <td class="data-table-td" mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th class="data-table-th" mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td class="data-table-th" mat-cell *matCellDef="let element">
+            <button class="btn btn-sm buttonSmall" (click)="viewAttendance(element.businessName);">
+              VIEW ATTENDANCE
+            </button>
+            <button class="btn btn-sm buttonSmall ml-5">
+              PROCESS PAYMENT
+            </button>
+          </td>
+        </ng-container>
+        <tr class="data-table-tr" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="data-table-tr" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="row no-gutters" [ngClass]="toggleViewTrips?'d-block':'d-none'">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div style="padding: 1rem;">
+        <div class="row no-gutters">
+          <div class="col-12 col-md-12 col-lg-12">
+            <div class="container1 pt-3 pb-3">
+              <div class="row no-gutters ">
+                <div class="col-12 col-md-12 col-lg-6 calendar-header pl-4">
+                  {{displayMonth}} {{displayYear}}
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end pr-5">
+                  <!-- <button class="btn btn-sm buttonSmall" (click)="setCurrentMonth()">Today</button> -->
+                  <button class="btn btn-sm buttonSmall" (click)="decreaseMonth()" style="margin-right: 1rem;">
+                    <img src="../../assets/images/previous.svg" alt=""></button>
+                  <button class="btn btn-sm buttonSmall" (click)="increaseMonth()">
+                    <img src="../../assets/images/next.svg" alt="">
+                  </button>
+                </div>
+              </div>
+              <div class="row no-gutters d-sm-none d-md-none d-lg-block">
+                <div class="col-12 col-md-12 col-lg-12">
+                  <table class='calendar-table mt-3' *ngIf="calendar"
+                    style="border-bottom: 1px solid rgb(151, 151, 151);">
+                    <thead class="calendar-table-head">
+                      <tr class="calendar-table-row"
+                        style="border-top: 0.00001rem solid rgb(151, 151, 151) !important;border-bottom: 0.001rem solid rgb(151, 151, 151) !important;height: 4vh !important;">
+                        <th class="th-content">Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <th>Sun</th>
+                      </tr>
+                    </thead>
+                    <tbody class="calendar-table-body">
+                      <tr *ngFor="let row of calendar | chunk: 7; let i = index" class="calendar-table-row">
+                        <td class="calendar-day calendar-table-data"
+                          [ngClass]="{'past-date': c.isPastDate, 'today': c.isToday}"
+                          *ngFor="let c of row; let j = index">
+                          
+                          <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}">
+                            <p class="cellDate" *ngIf="c.date.getDate() < 10">0{{c.date.getDate()}}</p>
+                            <p class="cellDate" *ngIf="c.date.getDate() > 9">{{c.date.getDate()}}</p>
+                          </div>
+
+                          <div class="count" *ngIf="!c.isPastDate">
+                            <div class="present-count text-center" (click)="getPresentCount(c.date);">
+                              100
+                            </div>
+                            <div class="absent-count text-center" (click)="getAbsentCount(c.date);">
+                              99
+                            </div>
+                          </div>
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row no-gutters d-sm-none d-md-none d-lg-block">
+                    <div class="col-12 col-md-12 col-lg-12 d-flex justify-content-end d-lg-flex">
+
+                      <div class="present-color text-center my-auto mr-2">
+                      </div>
+
+                      <span class="color-indicator">
+                        Drivers onduty
+                      </span>
+                      <div class="absent-color text-center ml-2 mr-2 my-auto">
+                      </div>
+
+                      <span class="color-indicator mr-3">
+                        Drivers offduty
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.container-fluid {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 8px #00000014;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.four-input-fields {
+  width: 22.2% !important;
+}
+
+.five-input-fields {
+  width: 16.5% !important;
+}
+
+.three-input-fields {
+  width: 30.5% !important;
+}

@@ -1,0 +1,54 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <!-- <mat-toolbar>
+
+    </mat-toolbar> -->
+    <div style="padding-left: 1rem;padding-right:1rem;">
+      <div class="row mx-auto py-5">
+        <div class="col-3 col-md-3 col-lg-3 my-auto p-0 text-left">
+          <img src="../../assets/images/company_logo.svg"
+            style="height: 3rem; width: auto;border-radius: 50%;text-align: center;" alt="">
+        </div>
+        <div class="col-9 col-md-9 col-lg-9 p-0">
+          <p class="companyName my-auto">Sri Venkateshwara tours and travels<br><span class="subscription">free
+              tier</span></p>
+        </div>
+      </div>
+      <mat-nav-list id="navList" style="line-height: 1rem;">
+
+        <a mat-list-item  routerLink="bookings" routerLinkActive='active' class="sidenavFont">Bookings</a>
+        <a mat-list-item routerLink="managefleet" routerLinkActive='active' class="sidenavFont">Manage fleet</a>
+        <a mat-list-item routerLink="payments" routerLinkActive='active' class="sidenavFont">Payments</a>
+        <a mat-list-item routerLink="managebusiness" routerLinkActive='active' class="sidenavFont">Manage Business</a>
+        <a mat-list-item routerLink="managesubvendors" routerLinkActive='active' class="sidenavFont">Manage
+          sub-vendors</a>
+        
+        <a mat-list-item href="#" class="sidenavFont">Subscriptions</a>
+        <a mat-list-item href="#" class="sidenavFont">Buy bulk inventory</a>
+        <a mat-list-item href="#" class="sidenavFont">Manage Addons</a>
+      </mat-nav-list>
+      <p class="settingsFont">Settings</p>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content style="border-radius:1rem 0 0 1rem;background-color: #FAFAFA;">
+    <button class="mobileMenu" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async" style="float: right;">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <mat-accordion class="d-none d-md-block d-lg-block" style="position: fixed;width: 20rem;">
+      <mat-expansion-panel style="border-top-left-radius: 1.25rem;">
+        <mat-expansion-panel-header style="height: 4rem;">
+          <p class="title-medium">Notification</p>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input matInput placeholder="First name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Age">
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

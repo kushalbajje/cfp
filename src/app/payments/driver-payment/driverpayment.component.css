@@ -1,0 +1,214 @@
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(0, 0, 0);
+}
+
+table.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0rem 0.5rem !important;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+tr.data-table-tr {
+  height: 4rem !important;
+  box-shadow: 5rem 1rem 5rem #00000014;
+  box-shadow: 0rem 0.1rem 0.5rem #00000014;
+  border-radius: 0.25rem;
+}
+
+.mat-form-field.date {
+  line-height: unset;
+  font: normal normal bold 0.75rem Exo !important;
+  letter-spacing: 0rem;
+  color: #020C26;
+  opacity: 1;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  width: 18%;
+} 
+
+
+ .cal-events {
+  display: none !important;
+}
+
+.cal-day-number {
+  float: left;
+  text-align: left;
+  font: normal normal bold 31px/41px Exo;
+  letter-spacing: 0px;
+  color: #020C26;
+  opacity: 1;
+}
+
+.cal-day-badge {
+  float: right;
+}
+
+
+.calendar-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  border: 0px solid #ffffff;
+  background-color: #fff;
+}
+
+.calendar-table thead.calendar-table-head th.th-content{
+  vertical-align: middle;
+  border-bottom: 0px solid #ffffff;
+  width: 10% !important;
+}
+
+
+
+.calendar-table td.calendar-table-data,
+.calendar-table th.th-content {
+  padding: .05rem;
+  vertical-align: top;
+}
+
+.calendar-day {
+  height: 5vh;
+  max-height: 5vh;
+  cursor: pointer;
+}
+
+.calendar-items-wrapper {
+  margin-left: -10px;
+  margin-right: -10px;
+  overflow-y: auto;
+  max-height: calc(100% - 20px);
+}
+
+.calendar-day.past-date {
+  text-align: left;
+  font: normal normal bold 31px/41px Exo;
+  letter-spacing: 0px;
+  color: #020C26;
+  opacity: 0.3;
+}
+
+.calendar-day:hover {
+  background-color: rgb(248, 248, 248);
+}
+
+.blue-date {
+  color: rgb(22, 119, 204) !important;
+}
+
+
+.calendar-header {
+  text-align: left;
+  font: normal normal bold 1.75rem Exo;
+  letter-spacing: 0rem;
+  color: #020C26;
+  opacity: 1;
+}
+
+.container1 {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0rem 0.1rem 0.5rem #00000014;
+  border-radius: 0.5rem;
+  opacity: 1;
+  height: 80% !important;
+  width: 100%;
+  margin-top: 1.6rem;
+}
+
+
+.present-count {
+  background: #21EA9D 0% 0% no-repeat padding-box;
+  opacity: 1;
+  border-radius: 50%;
+  height: 1.75rem;
+  width: 1.75rem;
+  padding-top: 0.4rem;
+  margin-right: 0.6rem;
+  text-align: center;
+  font: normal normal bold 12px/16px Exo;
+  letter-spacing: 0px;
+  color: #020C26;
+  opacity: 1;
+
+}
+
+.absent-count {
+  margin-right: 1rem;
+  background: #FF0000 0% 0% no-repeat padding-box;
+  opacity: 1;
+  border-radius: 50%;
+  height: 1.75rem;
+  width: 1.75rem;
+  padding: 0.4rem;
+  text-align: center;
+  font: normal normal bold 0.75rem Exo;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+
+.count {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cellDate {
+  text-align: left;
+  font: normal normal bold 1.4rem Exo;
+  letter-spacing: 0px;
+  color: #020C26;
+  opacity: 1;
+  margin: 0rem !important;
+}
+
+th.th-content {
+  margin-top: 10px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  text-align: left;
+  font: normal normal normal 18px/24px Exo;
+  letter-spacing: 0px;
+  color: #020C26;
+  opacity: 1;
+}
+
+td.calendar-table-data {
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+}
+
+
+tr.calendar-table-row {
+  height: 8vh !important;
+}
+
+
+.color-indicator {
+  text-align: left;
+  font: normal normal normal 0.75rem Exo;
+  letter-spacing: 0rem;
+  color: #020C26;
+  opacity: 1;
+}
+
+.absent-color {
+  background: #FF0000 0% 0% no-repeat padding-box;
+  opacity: 1;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+}
+
+.present-color {
+  background: #21EA9D 0% 0% no-repeat padding-box;
+  opacity: 1;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+}

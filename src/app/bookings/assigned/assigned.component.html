@@ -1,0 +1,233 @@
+<div style="padding-top:16rem;">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-4 col-lg-5  left-component">
+      <div class="px-4 ml-4" style="box-shadow: 0rem 0.5rem 1.5rem #0000001F;background-color: #fff;">
+        <div class="d-flex justify-content-between align-items-center" style="padding-top:3rem;padding-bottom: 1rem;">
+          <p class="title-medium ">{{type}}</p>
+          <div class="float-right">
+            <div class="d-flex" style="cursor: pointer;">
+              <h2 mat-button [matMenuTriggerFor]="belowMenu" class="mr-1">Filter by</h2>
+              <mat-icon matSuffix [matMenuTriggerFor]="belowMenu" [inline]="true"
+                style="font-size: 1.625rem;margin-top: 0.25rem;">filter_list</mat-icon>
+            </div>
+
+            <mat-menu #belowMenu="matMenu" xPosition="before" yPosition="below">
+              <button mat-menu-item (click)="openBottomSheet();">By vehicle type</button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item>By company</button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item>By ride type</button>
+            </mat-menu>
+          </div>
+        </div>
+
+        <div class="list-group ">
+          <div class=" list-group-item card my-2 p-4" style="box-shadow: 0rem 0.1rem 0.5rem #4B4B4B1F;border: none;"
+            *ngFor="let ride of rides;">
+            <p class="title-small">{{ride.ride_type}} <span
+                class="float-right text-small justify-content-end">{{ride.pickup_time}}</span>
+            </p>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Business name
+                </p><span class="text-small-info ml-2">{{ride.company_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Ride ID
+                </p><span class="text-small-info ml-2">{{ride.trip_id}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Pickup
+                </p><span class="text-small-info ml-2"> {{ride.source_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Drop off
+                </p><span class="text-small-info ml-2"> {{ride.destination_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Vehicle type
+                </p><span class="text-small-info ml-2"> {{ride.vehicle_type}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Driver
+                </p><span class="text-small-info ml-2"> {{ride.driver_name}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex">
+                <p class="text-small  right-align">
+                  Vehicle
+                </p><span class="text-small-info ml-2"> {{ride.vehicle_number}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12  text-right ">
+                <button class="btn btn-sm buttonSmall" (click)="viewDetails($event);">VIEW
+                  DETAILS</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-8 col-lg-7  d-none d-md-block d-lg-block right-component">
+      <div class="map" id="map" class="match-parent" [ngClass]="toggle?'d-block':'d-none'"></div>
+      <div class="container-fluid p-5" [ngClass]="toggle?'d-none':'d-block'">
+
+        <div class="title-medium text-center d-inline position-absolute" style="left: 40%;">
+          View details
+        </div>
+        <div class="float-right d-inline">
+          <button class="btn btn-sm buttonSmall mr-3" matTooltip="removes this trip from your list"
+            matTooltipPosition="below">CANCEL TRIP</button>
+          <button class="btn btn-sm close" (click)="closeviewDetails($event);">
+            CLOSE X
+          </button>
+        </div>
+
+        <div class="d-flex pt-5 justify-content-between w-100">
+          <mat-form-field appearance="outline" class="three-input-fields   ">
+            <mat-label>Company name</mat-label>
+            <input matInput placeholder="Company name" [(ngModel)]="companyName">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields   ">
+            <mat-label>Ride type</mat-label>
+            <input matInput placeholder="Ride type" [(ngModel)]="rideType">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields   ">
+            <mat-label>Pickup date & time</mat-label>
+            <input matInput placeholder="Pickup date & time" [(ngModel)]="pickupDateAndTime">
+          </mat-form-field>
+        </div>
+        <div class="d-flex my-2 justify-content-between">
+          <mat-form-field appearance="outline" class="three-input-fields   ">
+            <mat-label>passenger name</mat-label>
+            <input matInput placeholder="Passenger name" [(ngModel)]="passengerName">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields   ">
+            <mat-label>passenger number</mat-label>
+            <input matInput placeholder="Passenger number" [(ngModel)]="passengerNumber">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="three-input-fields   ">
+            <mat-label>Vehicle category</mat-label>
+            <input matInput placeholder="Vehicle category" [(ngModel)]="vehicleCategory">
+          </mat-form-field>
+        </div>
+        <div class="d-flex my-2 justify-content-between">
+          <mat-form-field appearance="outline" class="two-input-fields   ">
+            <mat-label>Pickup location</mat-label>
+            <input matInput placeholder="Pickup location" [(ngModel)]="pickupLocation">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="two-input-fields   ">
+            <mat-label>Drop off location</mat-label>
+            <input matInput placeholder="Drop off location" [(ngModel)]="dropOffLocation">
+          </mat-form-field>
+        </div>
+        <div class="d-flex my-2 justify-content-between align-items-start">
+          <mat-form-field appearance="outline" class="four-input-fields   ">
+            <mat-label>Driver name</mat-label>
+            <input matInput placeholder="Driver name" [(ngModel)]="driverName">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="four-input-fields   ">
+            <mat-label>Driver number</mat-label>
+            <input matInput placeholder="Driver number" [(ngModel)]="driverNumber">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="four-input-fields   ">
+            <mat-label>Vehicle number</mat-label>
+            <input matInput placeholder="Vehicle number" [(ngModel)]="vehicleNumber">
+          </mat-form-field>
+          <div class="four-input-fields   ">
+            <button class="btn btn-sm buttonSmall h-25"
+              style="padding: 1.1rem 4rem 1.1rem 4rem !important;margin-top: 0.3rem;" (click)="reassign($event);">
+              REASSIGN
+            </button>
+          </div>
+        </div>
+
+        <div [ngClass]="toggle1?'d-block':'d-none'">
+          <mat-checkbox class="small-font    my-2">Automatically assign available drivers</mat-checkbox>
+          <mat-tab-group>
+            <mat-tab class="my-2" label="Available  drivers">
+              <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0" class="px-1">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="driver_name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Driver name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.driver_name}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="driver_number">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Driver number</th>
+                  <td mat-cell *matCellDef="let element"> {{element.driver_number}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="duty_status">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Duty status </th>
+                  <td mat-cell *matCellDef="let element"> {{element.duty_status}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                  <td mat-cell *matCellDef="let element"><button class="btn btn-sm buttonSmall">
+                      ASSIGN DRIVER
+                    </button> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-tab>
+            <mat-tab class="my-2" label="Available sub-vendors">
+              <table mat-table [dataSource]="vendorSource" matSort #sorter1="matSort" class="mat-elevation-z6"
+                class="px-1">
+                <!-- Position Column -->
+                <ng-container matColumnDef="vendor_name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Vendor name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.vendor_name}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="vendor_number">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Vendor number</th>
+                  <td mat-cell *matCellDef="let element"> {{element.vendor_number}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                  <td mat-cell *matCellDef="let element">
+                    <button class="btn btn-sm buttonSmall">
+                      PUSH BOOKING
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedVendorColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedVendorColumns;"></tr>
+              </table>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

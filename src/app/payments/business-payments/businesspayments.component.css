@@ -1,0 +1,31 @@
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(0, 0, 0);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0rem 0.5rem !important;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+tr {
+  height: 4rem !important;
+  box-shadow: 5rem 1rem 5rem #00000014;
+  box-shadow: 0rem 0.1rem 0.5rem #00000014;
+  border-radius: 0.25rem;
+}
+
+.mat-form-field.date {
+  line-height: unset;
+  font: normal normal bold 0.75rem Exo !important;
+  letter-spacing: 0rem;
+  color: #020C26;
+  opacity: 1;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  width: 18%;
+}

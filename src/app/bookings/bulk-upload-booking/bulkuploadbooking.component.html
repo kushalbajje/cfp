@@ -1,0 +1,49 @@
+<div style="padding: 3rem;">
+  <div>
+    <div class="row no-gutters">
+      <div class="col-12 col-md-12 col-lg-12">
+        <p class="breadCrumbs-small" [routerLink]="['/sidenav/bookings']" style="cursor: pointer;">Home</p>
+        <p class="breadCrumbs-large">Bulk booking</p>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters pt-4">
+    <div class="col-12">
+
+      <div class="container-fluid outer-box px-3 pt-3 pb-5" >
+        <div class="container-fluid p-5 no-gutters">
+          <ngx-dropzone (change)="onSelect($event)" class="justify-content-center" [multiple]="false" [accept]="'.csv'">
+            <ngx-dropzone-label>
+              <img src="../../assets/images/bulk_upload.svg" alt="">
+              <p class="text-medium-light pt-2">Drag your files here to upload the booking</p>
+              <p class="text-medium-light my-3 p-3">Looking for template file? <span style="text-decoration: underline;"> Click here to download</span> </p>
+            </ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+        <mat-checkbox class="small-font px-5 my-3">Automatically assign available drivers</mat-checkbox>
+        <div class="text-center">
+          <button class="btn btn-lg buttonLarge my-4" (click)="onUpload();">UPLOAD BULK BOOKING</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- <ngx-dropzone (change)="onSelect($event, 'Driving licence')" class="justify-content-center" [multiple]="false"
+  accept="image/jpeg,image/jpg,image/png,image/gif">
+  <ngx-dropzone-label>
+
+  </ngx-dropzone-label>
+  <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of driverLicenceFiles" [file]="f"
+    [removable]="true" (removed)="onRemove(f, 'Driving licence')">
+  </ngx-dropzone-image-preview>
+</ngx-dropzone> -->

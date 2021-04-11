@@ -1,0 +1,100 @@
+.image-style {
+  text-align: center;
+  border-radius: 50%;
+  background-color: #F0F3F7;
+  padding: 1.2rem;
+}
+
+.card {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0rem 0.25rem 0.75rem #0000001A;
+  border-radius: 0.8rem !important;
+  opacity: 1;
+  border: none;
+  cursor: pointer;
+  max-width: 460px;
+}
+
+/* .container {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0rem 0.1rem 0.5rem #0000001A;
+  border-radius: 0.5rem;
+  opacity: 1;
+} */
+
+.profile {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 8px #00000014;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.close {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 0.01rem solid #020C26 !important;
+  border-radius: 0.4rem;
+  opacity: 1;
+  color: #020C26;
+  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+  font: normal normal bold 0.625rem Exo;
+  letter-spacing: 0rem;
+}
+
+ngx-dropzone {
+  border-radius: 50% !important;
+  width: 75%;
+  align-items: center;
+}
+
+.card1 {
+  height: 10vh !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.profile {
+  height: 25vh;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.square {
+  height: 12rem;
+  width: 12rem;
+}
+
+
+.four-input-fields {
+  width: 22.2% !important;
+}
+
+.three-input-fields {
+  width: 30.5% !important;
+}
+
+
+mat-expansion-panel{
+  border-radius: 0px;
+}
+
+.panel-active1, .panel-active3, .panel-active2{
+  background-color:#FAFAFA;
+}
+
+.panel-not-active1,.panel-not-active2,.panel-not-active3 {
+  background-color:#FFFFFF;
+}
+
+.mat-expansion-panel{
+  box-shadow: none !important;
+  border-bottom:1px solid;
+  border-bottom-color: #DEE2E6;
+
+  /* border-top: 1px solid; */
+}
+
+/* .mat-expansion-panel-header{
+  align-items: flex-end !important;
+} */

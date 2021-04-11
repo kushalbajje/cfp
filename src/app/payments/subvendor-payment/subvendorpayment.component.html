@@ -1,0 +1,135 @@
+<div class="pt-5 px-5">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-12 col-lg-12 my-auto">
+      <div class="d-flex">
+        <p class="breadCrumbs-small" (click)="navigateHome();">Home</p>
+        <p class="breadCrumbs-small pl-4" (click)="navigatePayments();">Payments</p>
+        <p class="breadCrumbs-small pl-4" [ngClass]="toggleViewTrips?'d-block':'d-none'" (click)="closeViewtrips();">
+          Sub-vendor payments</p>
+      </div>
+      <div class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleViewTrips?'d-none':'d-block'">
+        Sub-vendor payments
+      </div>
+      <div class="breadCrumbs-large my-auto pt-2" [ngClass]="toggleViewTrips?'d-block':'d-none'">
+        {{subvendorName}}
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-12 col-md-12 col-lg-12 ">
+      <mat-form-field class="no-line date" appearance="outline">
+        <input matInput [matDatepicker]="myDatePicker" [formControl]="date" (click)="myDatePicker.open();"
+          [disabled]="true">
+        <img src="../../assets/images/calendar.svg" alt="" (click)="myDatePicker.open();" matPrefix
+          class="mr-5 align-self-center">
+        <mat-datepicker mat-hide-icons="calenda"></mat-datepicker>
+        <mat-datepicker #myDatePicker [disabled]="false"></mat-datepicker>
+      </mat-form-field>
+      <button class="btn-sm buttonSmall calender-button px-3 py-2 " (click)="prevDay();">
+        <img src="../../assets/images/previous.svg" alt="">
+      </button>
+      <button class="btn-sm buttonSmall calender-button px-3 py-2 ml-2" (click)="nextDay();">
+        <img src="../../assets/images/next.svg" alt="">
+      </button>
+    </div>
+  </div>
+  <div class="row no-gutters" [ngClass]="toggleViewTrips?'d-none':'d-block'">
+    <div class="col-12">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0" class="px-1">
+
+        <!-- Business name Column -->
+        <ng-container matColumnDef="businessName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Business name </th>
+          <td mat-cell *matCellDef="let element"> {{element.businessName}} </td>
+        </ng-container>
+
+        <!-- Trips completed Column -->
+        <ng-container matColumnDef="tripsCompleted">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Trips completed</th>
+          <td mat-cell *matCellDef="let element"> {{element.tripsCompleted}} </td>
+        </ng-container>
+
+        <!--  Total amount Column -->
+        <ng-container matColumnDef="totalAmount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="btn btn-sm buttonSmall" (click)="viewTrips(element.businessName);">
+              VIEW TRIPS
+            </button>
+            <button class="btn btn-sm buttonSmall ml-5">
+              GENERATE INVOICE
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="row no-gutters" [ngClass]="toggleViewTrips?'d-block':'d-none'">
+    <div class="col-12">
+      <table mat-table [dataSource]="tripSource" matSort #sorter1="matSort" class="mat-elevation-z0" class="px-1">
+
+        <!-- Business name Column -->
+        <ng-container matColumnDef="tripId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Trip ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.tripId}} </td>
+        </ng-container>
+
+        <!-- Trips completed Column -->
+        <ng-container matColumnDef="pickup">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Pickup</th>
+          <td mat-cell *matCellDef="let element"> {{element.pickup}} </td>
+        </ng-container>
+
+        <!--  Total amount Column -->
+        <ng-container matColumnDef="dropOff">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Drop off </th>
+          <td mat-cell *matCellDef="let element"> {{element.dropOff}} </td>
+        </ng-container>
+
+        <!--  Total amount Column -->
+        <ng-container matColumnDef="pickupDateAndTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Pickup date & time </th>
+          <td mat-cell *matCellDef="let element"> {{element.pickupDateAndTime}} </td>
+        </ng-container>
+
+        <!--  -->
+        <ng-container matColumnDef="tripAmount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Trip amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.tripAmount}} </td>
+        </ng-container>
+
+        <!--  -->
+        <ng-container matColumnDef="driverName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Driver name </th>
+          <td mat-cell *matCellDef="let element"> {{element.driverName}} </td>
+        </ng-container>
+
+        <!--  -->
+        <ng-container matColumnDef="vehicleDetails">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Vehicle detials </th>
+          <td mat-cell *matCellDef="let element"> {{element.vehicleDetails}} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="btn btn-sm buttonSmall">
+              EDIT TRIP AMOUNT
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="tripDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tripDisplayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

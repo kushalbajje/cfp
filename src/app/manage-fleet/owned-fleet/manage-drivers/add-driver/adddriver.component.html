@@ -1,0 +1,257 @@
+<div style="padding: 3rem;background-color: #FAFAFA;">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-6 col-lg-6 d-flex my-auto">
+      <p class="breadCrumbs-small" [routerLink]="['/sidenav/bookings']">Home</p>
+      <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managefleet']">Manage fleet</p>
+      <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managefleet/ownedfleet']">Owned fleet</p>
+    </div>
+  </div>
+  <p class="breadCrumbs-medium mt-2">Manage Drivers</p>
+
+  <div class="row no-gutters mt-5">
+    <div class="col-12">
+      <div class="container-fluid" style="padding: 4rem;">
+        <div class="title-medium text-center d-inline position-absolute" style="left: 40%;">
+          Add new driver
+        </div>
+        <div class="float-right">
+          <button class="btn btn-sm close d-inline" [routerLink]="['/sidenav/managefleet/ownedfleet/managedrivers']">
+            CLOSE X
+          </button>
+        </div>
+        <!-- Basic information -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Basic information</p>
+          <div class="d-flex justify-content-between my-4">
+            <div class="w-25">
+              <img src="https://picsum.photos/id/237/200/200" class="img-fluid" style="border-radius: 50%;" alt="">
+            </div>
+            <div class="w-75">
+              <div class="d-flex justify-content-between">
+                <mat-form-field appearance="outline" class="three-input-fields my-2">
+                  <mat-label>Driver name</mat-label>
+                  <input matInput placeholder="Driver name" [(ngModel)]="driverName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields my-2">
+                  <mat-label>Phone number</mat-label>
+                  <input matInput placeholder="Phone number" [(ngModel)]="phoneNumber">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields my-2">
+                  <mat-label>Alternate number</mat-label>
+                  <input matInput placeholder="Alternate number" [(ngModel)]="alternateNumber">
+                </mat-form-field>
+              </div>
+              <div class="d-flex justify-content-between">
+                <mat-form-field appearance="outline" class="three-input-fields my-2">
+                  <mat-label>PAN number</mat-label>
+                  <input matInput placeholder="PAN number" [(ngModel)]="panNumber">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields my-2">
+                  <mat-label>Aadhar card number</mat-label>
+                  <input matInput placeholder="Aadhar card number" [(ngModel)]="aadharCardNumber">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields my-2">
+                  <mat-label>Birthdate</mat-label>
+                  <input matInput [matDatepicker]="birthdate_date">
+                  <mat-datepicker-toggle matSuffix [for]="birthdate_date">
+                    <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #birthdate_date></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="w-100 d-flex">
+                <mat-form-field appearance="outline" class="three-input-fields mt-2">
+                  <mat-label>Address type</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let address of addressTypes" [value]="address">{{address}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="my-2" style="width: 70% !important;padding-left: 3.3rem;">
+                  <mat-label>Address</mat-label>
+                  <textarea matInput placeholder="Address" rows="1" [(ngModel)]="address"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Work Information -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Work information</p>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Select branch</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let branch of branches" [value]="branch">{{branch}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Salary per month</mat-label>
+              <input matInput placeholder="Salary per month" [(ngModel)]="salaryPerMonth">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Daily wages</mat-label>
+              <input matInput placeholder="Daily wages" [(ngModel)]="dailyWages">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Daily working hours</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let time of times" [value]="time">{{time}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Allowances -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Allowances</p>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Daily allowances</mat-label>
+              <input matInput placeholder="Daily allowances" [(ngModel)]="dailyAllowances">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Over time per hour</mat-label>
+              <input matInput placeholder="Over time per hour" [(ngModel)]="overTimePerHour">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Outstation allowances per day</mat-label>
+              <input matInput placeholder="Outstation allowances per day" [(ngModel)]="outstationAllowancePerDay">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields">
+              <mat-label>Outstation night allowances</mat-label>
+              <input matInput placeholder="Outstation night allowances" [(ngModel)]="outstationNightAllowance">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Driver documents -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Vehicle documents</p>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <!-- Driving Licence -->
+            <div class="w-25 d-flex flex-column">
+              <p class="small-font">Driving licence</p>
+              <ngx-dropzone (change)="onSelect($event, 'Driving licence')" class="justify-content-center my-4"
+                [multiple]="false" accept="image/jpeg,image/jpg,image/png,image/gif">
+                <ngx-dropzone-label>
+                  <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                  <p class="text-medium-light pt-2">Click here to upload</p>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of driverLicenceFiles"
+                  [file]="f" [removable]="true" (removed)="onRemove(f, 'Driving licence')">
+                </ngx-dropzone-image-preview>
+              </ngx-dropzone>
+              <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                <mat-label>Licence number</mat-label>
+                <input matInput placeholder="Licence number" [(ngModel)]="drivingLicenceNumber">
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                <mat-label>Expiry date</mat-label>
+                <input matInput [matDatepicker]="driving_licence_expiry_date">
+                <mat-datepicker-toggle matSuffix [for]="driving_licence_expiry_date">
+                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #driving_licence_expiry_date></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <!-- Display badge -->
+            <div class="w-25 d-flex flex-column">
+              <p class="small-font">Badge</p>
+              <ngx-dropzone (change)="onSelect($event, 'Badge')" class="justify-content-center my-4" [multiple]="false"
+                accept="image/jpeg,image/jpg,image/png,image/gif">
+                <ngx-dropzone-label>
+                  <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                  <p class="text-medium-light pt-2">Click here to upload</p>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of badgeFiles" [file]="f"
+                  [removable]="true" (removed)="onRemove(f,'Badge')">
+                </ngx-dropzone-image-preview>
+              </ngx-dropzone>
+              <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                <mat-label>Badge number</mat-label>
+                <input matInput placeholder="Badge number" [(ngModel)]="badgeNumber">
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                <mat-label>Expiry date</mat-label>
+                <input matInput [matDatepicker]="badge_expiry_date">
+                <mat-datepicker-toggle matSuffix [for]="badge_expiry_date">
+                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #badge_expiry_date></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <!-- Police verifiction -->
+            <div class="w-25 d-flex flex-column">
+              <p class="small-font">Police verification</p>
+              <ngx-dropzone (change)="onSelect($event, 'Police verification')" class="justify-content-center my-4"
+                [multiple]="false" accept="image/jpeg,image/jpg,image/png,image/gif">
+                <ngx-dropzone-label>
+                  <img src="../../assets/images/uploading-files-to-the-cloud.svg" alt="">
+                  <p class="text-medium-light pt-2">Click here to upload</p>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of policeVerificationFiles"
+                  [file]="f" [removable]="true" (removed)="onRemove(f, 'Police verification')">
+                </ngx-dropzone-image-preview>
+              </ngx-dropzone>
+              <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                <mat-label>Verification number</mat-label>
+                <input matInput placeholder="Verification number" [(ngModel)]="policeVerificationNumber">
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 100% !important;" class="pt-4">
+                <mat-label>Expiry date</mat-label>
+                <input matInput [matDatepicker]="police_vrification_expiry_date">
+                <mat-datepicker-toggle matSuffix [for]="police_vrification_expiry_date">
+                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #police_vrification_expiry_date></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <!-- Bank information -->
+        <div class="pt-5">
+          <p class="pb-2 font-medium2">Bank inforamtion</p>
+          <div class="d-flex justify-content-between my-4">
+            <mat-form-field appearance="outline" class="three-input-fields">
+              <mat-label>Account holder name</mat-label>
+              <input matInput placeholder="Account holder name" [(ngModel)]="accountHolderName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields">
+              <mat-label>Account number</mat-label>
+              <input matInput placeholder="Account number" [(ngModel)]="accountNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields">
+              <mat-label>IFSC code</mat-label>
+              <input matInput placeholder="IFSC code" [(ngModel)]="ifscCode">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between form-padding">
+
+            <mat-form-field appearance="outline" class="three-input-fields">
+              <mat-label>Bank name</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let bank of banks" [value]="bank">{{bank}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="three-input-fields">
+              <mat-label>Branch</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let branch of branches" [value]="branch">{{branch}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="opacity: 0;" class="three-input-fields">
+              <mat-label>Branch</mat-label>
+              <input matInput placeholder="IFSC code" [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="btn btn-lg buttonLarge">
+            ADD NEW DRIVER
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

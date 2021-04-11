@@ -1,0 +1,37 @@
+<div style="height: 100%;padding: 3rem;" *ngIf="outlet.isActivated == false">
+  <div class="row no-gutters" style="height: 100%;">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="row no-gutters">
+        <div class="col-12 col-md-12 col-lg-12 d-flex">
+          <p [routerLink]="['/sidenav/bookings']" class="breadCrumbs-small">Home</p>
+          <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managefleet']">Manage fleet</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-12 col-md-12 col-lg-12 breadCrumbs-large my-auto pt-2">
+          Owned Fleet
+        </div>
+      </div>
+
+      <div class="container no-gutters">
+        <div class="row no-gutters mt-5">
+          <div class="col-12 col-md-12 col-lg-6 p-3">
+            <div class="card p-4 px-5 d-flex flex-row" [routerLink]="['/sidenav/managefleet/ownedfleet/managevehicles']">
+              <img src="../../assets/images/manage_vehicles.svg" class="card-img my-1" alt="">
+              <div style="width: 100%;align-self: center;" class="card-font-medium p-4">Manage Vehicles</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-6 p-3">
+            <div class="card p-4 px-5 d-flex flex-row" [routerLink]="['/sidenav/managefleet/ownedfleet/managedrivers']">
+              <img src="../../assets/images/manage_drivers.svg" class="card-img my-1" alt="">
+              <div style="width: 100%;align-self: center;" class="card-font-medium p-4">Manage Drivers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<router-outlet #outlet="outlet"></router-outlet>

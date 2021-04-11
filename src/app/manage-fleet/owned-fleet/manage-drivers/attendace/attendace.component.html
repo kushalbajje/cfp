@@ -1,0 +1,91 @@
+<div style="padding: 3rem;">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="row no-gutters">
+        <div class="col-12 col-md-12 col-lg-12 d-flex">
+          <p class="breadCrumbs-small" [routerLink]="['/sidenav/bookings']">Home</p>
+          <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managefleet']">Manage fleet</p>
+          <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managefleet/ownedfleet/managedrivers']">Manage Drivers</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-12 col-md-12 col-lg-12 breadCrumbs-large my-auto pt-2">
+          View driver attendance
+        </div>
+      </div>
+      <div class="container1 pt-3 pb-3">
+        <div class="row no-gutters ">
+          <div class="col-12 col-md-12 col-lg-6 calendar-header pl-4">
+            {{displayMonth}} {{displayYear}}
+          </div>
+          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end pr-5">
+            <!-- <button class="btn btn-sm buttonSmall" (click)="setCurrentMonth()">Today</button> -->
+            <button class="btn btn-sm buttonSmall" (click)="decreaseMonth()" style="margin-right: 1rem;">
+              <img src="../../assets/images/next.svg" alt=""></button>
+            <button class="btn btn-sm buttonSmall" (click)="increaseMonth()">
+              <img src="../../assets/images/previous.svg" alt="">
+            </button>
+          </div>
+        </div>
+        <div class="row no-gutters d-block">
+          <div class="col-12 col-md-12 col-lg-12">
+            <table class='calendar-table mt-3' *ngIf="calendar" style="border-bottom: 1px solid rgb(151, 151, 151);">
+              <thead>
+                <tr
+                  style="border-top: 0.00001rem solid rgb(151, 151, 151) !important;border-bottom: 0.001rem solid rgb(151, 151, 151) !important;height: 4vh !important;">
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                  <th>Sun</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of calendar | chunk: 7; let i = index">
+                  <td class="calendar-day" [ngClass]="{'past-date': c.isPastDate, 'today': c.isToday}"
+                    *ngFor="let c of row; let j = index">
+                    <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}">
+                      <p class="cellDate" *ngIf="c.date.getDate() < 10">0{{c.date.getDate()}}</p>
+                      <p class="cellDate" *ngIf="c.date.getDate() > 9">{{c.date.getDate()}}</p>
+                    </div>
+
+                    <div class="count" *ngIf="!c.isPastDate">
+                      <div class="present-count text-center" (click)="getPresentCount(c.date);">
+                        100
+                      </div>
+                      <div class="absent-count text-center" (click)="getAbsentCount(c.date);">
+                        99
+                      </div>
+                    </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row no-gutters d-sm-none d-md-none d-lg-block">
+              <div class="col-12 col-md-12 col-lg-12 d-flex justify-content-end d-lg-flex">
+
+                <div class="present-color text-center my-auto mr-2">
+                </div>
+
+                <span class="color-indicator">
+                  Drivers onduty
+                </span>
+                <div class="absent-color text-center ml-2 mr-2 my-auto">
+                </div>
+
+                <span class="color-indicator mr-3">
+                  Drivers offduty
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

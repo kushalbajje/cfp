@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-lg-6 align-self-center" style="background: #fbfcfe;">
+      <div class="d-flex justify-content-center align-items-md-center container full-vh">
+        <div class="row">
+          <div class="col-md-12 text-center d-flex flex-column">
+            <img class="mx-auto" src="assets/images/logo.svg" style="width: 60%;height: auto;padding: 1rem;">
+            <p class="instruction">Enter the below details to continue</p>
+            <div class="inputstyle"><input type="text" class="inputcustom" type="email" [(ngModel)]='email'
+                placeholder="Enter your email address"></div>
+            <div class="inputstyle"><input type="text" class="inputcustom" type="password" [(ngModel)]='password'
+                placeholder="Enter password"></div>
+            <div class="text-left pt-3">
+              <a class="forgotPassword" [routerLink]="['/forgotpassword']">
+                <span>
+                  Forgot password?
+                </span>
+              </a>
+            </div>
+            <button class="btn btn-lg my-5 login-button" (click)="sidebar();" type="submit">LOGIN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-0 col-md-0 col-lg-6 d-none d-lg-block align-self-center">
+      <div class="container-fluid">
+        <img src="assets/images/Illustration.png" style="height: auto;width: 100%;">
+        <carousel [cellsToShow]="1" [dots]="true" [lightDOM]="true" [autoplayInterval]="3000" [loop]="true"
+          [autoplay]="true" [pauseOnHover]="true" [arrows]="false" [height]="150">
+          <div class="carousel-cell">
+            <div class="row  mt-2" style="background-color: rgb(255, 255, 255);">
+              <div class="col-3 col-md-3 col-lg-3 p-0" style="background-color: #FCFCFC;height: 9rem;">
+
+              </div>
+              <div class="col-9 col-md-9 col-lg-9 p-0 my-auto">
+                <p class="carouselHeading">Manage your bookings</p>
+                <p class="carouselContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac
+                  risusorci. Cras ut purus utlacus
+                  tempus condimentum.</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-cell">
+            <div class="row mt-2" style="background-color: rgb(255, 255, 255);">
+              <div class="col-3 col-md-3 col-lg-3 p-0" style="background-color: #FCFCFC;height: 9rem;">
+
+              </div>
+              <div class="col-9 col-md-9 col-lg-9 p-0 my-auto">
+                <p class="carouselHeading">Manage your bookings</p>
+                <p class="carouselContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac
+                  risusorci. Cras ut purus utlacus
+                  tempus condimentum.</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-cell">
+            <div class="row  mt-2" style="background-color: rgb(255, 255, 255);">
+              <div class="col-3 col-md-3 col-lg-3 p-0" style="background-color: #FCFCFC;height: 9rem;">
+
+              </div>
+              <div class="col-9 col-md-9 col-lg-9 p-0 my-auto">
+                <p class="carouselHeading">Manage your bookings</p>
+                <p class="carouselContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac
+                  risusorci. Cras ut purus utlacus
+                  tempus condimentum.</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-cell">
+            <div class="row  mt-2" style="background-color: rgb(255, 255, 255);">
+              <div class="col-3 col-md-3 col-lg-3 p-0" style="background-color: #FCFCFC;height: 9rem;">
+
+              </div>
+              <div class="col-9 col-md-9 col-lg-9 p-0 my-auto">
+                <p class="carouselHeading">Manage your bookings</p>
+                <p class="carouselContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac
+                  risusorci. Cras ut purus utlacus
+                  tempus condimentum.</p>
+              </div>
+            </div>
+          </div>
+        </carousel>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

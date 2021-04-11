@@ -1,0 +1,86 @@
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0rem 1rem !important;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+
+tr {
+  height: 4rem !important;
+  box-shadow: 5rem 1rem 5rem #00000014;
+  box-shadow: 0rem 0.1rem 0.5rem #00000014;
+  border-radius: 0.25rem;
+  border-right: 0.3rem solid red;
+}
+
+.cards {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0rem 0.25rem 0.75rem #0000000F;
+  border-radius: 1rem;
+  opacity: 1;
+}
+
+
+.container1 {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0rem 0.1rem 0.5rem #00000014;
+  border-radius: 0.5rem;
+  opacity: 1;
+}
+
+
+.close {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 0.01rem solid #020C26 !important;
+  border-radius: 0.4rem;
+  opacity: 1;
+  color: #020C26;
+  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+  font: normal normal bold 0.625rem Exo;
+  letter-spacing: 0rem;
+}
+
+
+th {
+  border-collapse: none;
+}
+
+.card {
+  height: 25vh !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: rgb(0, 0, 0) !important;
+}
+
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+  background-color: black !important;
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: #fafafa !important;
+}
+
+.view-details {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 8px #00000014;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.four-input-fields {
+  width: 22.2% !important;
+}
+
+.three-input-fields {
+  width: 30% !important;
+}
+
+

@@ -1,0 +1,206 @@
+<div style="padding: 3rem;background-color: #FAFAFA;">
+  <div class="row no-gutters">
+    <div class="col-12 ">
+      <div class="d-flex">
+        <p class="breadCrumbs-small" [routerLink]="['/sidenav/bookings']">Home</p>
+        <p class="breadCrumbs-small pl-4" [routerLink]="['/sidenav/managesubvendors']">Manage subvendor</p>
+      </div>
+      <div>
+        <p class="breadCrumbs-medium mt-2">Add new vendor</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row no-gutters mt-5">
+    <div class="col-12">
+      <div class="container-fluid p-5">
+        <div class="d-flex justify-content-between">
+          <div class="title-medium">
+            Profile settings
+          </div>
+          <button class="btn btn-sm close d-inline" [routerLink]="['/sidenav/managesubvendors']">
+            CLOSE X
+          </button>
+        </div>
+
+        <!-- Basic information -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Basic information</p>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <div class="w-25">
+              <img src="https://picsum.photos/id/237/200/200" class="img-fluid" style="border-radius: 50%;" alt="">
+            </div>
+            <div class="w-75">
+              <div class="d-flex justify-content-between my-4">
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Sub-vendor name</mat-label>
+                  <input matInput placeholder="Sub-vendor name" [(ngModel)]="subvendorName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Website</mat-label>
+                  <input matInput placeholder="Website" [(ngModel)]="website">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Email address</mat-label>
+                  <input matInput placeholder="Email address" [(ngModel)]="emailAddress">
+                </mat-form-field>
+              </div>
+              <div class="d-flex justify-content-between my-4 form-padding">
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Contact number</mat-label>
+                  <input matInput placeholder="Contact number" [(ngModel)]="contactNumber">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>Contact person name</mat-label>
+                  <input matInput placeholder="Contact person name" [(ngModel)]="contactPersonName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="three-input-fields">
+                  <mat-label>State</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Billing and tax -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Billing and tax </p>
+          <div class="d-flex justify-content-between my-4">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>PAN number</mat-label>
+              <input matInput placeholder="PAN number" [(ngModel)]="panNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>GST type</mat-label>
+              <input matInput placeholder="GST type" [(ngModel)]="gstType">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>GSTIN number</mat-label>
+              <input matInput placeholder="GSTIN number" [(ngModel)]="gstinNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Service tax number</mat-label>
+              <input matInput placeholder="Service tax number" [(ngModel)]="serviceTaxNumber">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-4">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Reverse charge applicable</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let answer of conditional" [value]="answer">{{answer}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>TDS%</mat-label>
+              <input matInput placeholder="TDS%" type="number" [(ngModel)]="tds">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Revenue share%</mat-label>
+              <input matInput placeholder="Revenue share%" type="number" [(ngModel)]="revenueShare">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Tax classification for purchase order</mat-label>
+              <input matInput placeholder="Tax classification for purchase order" [(ngModel)]="taxClassification">
+            </mat-form-field>
+          </div>
+
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Tax applicable</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let tax of taxes" [value]="tax">{{tax}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Billing name</mat-label>
+              <input matInput placeholder="Billing name" [(ngModel)]="billingName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Billing address</mat-label>
+              <input matInput placeholder="Billing address" [(ngModel)]="billingAddress">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>State</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let state of states" value="state">
+                  {{state}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Driver allowance settings -->
+        <div class="border-bottom pt-5">
+          <p class="pb-2 font-medium2">Driver allowances settings </p>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Early time</mat-label>
+              <input matInput placeholder="Early time" type="number" [(ngModel)]="earlyTime">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>late time</mat-label>
+              <input matInput placeholder="Early time" type="number" [(ngModel)]="lateTime">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="opacity: 0;" class="four-input-fields ">
+              <mat-label>Early time</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="opacity: 0;" class="four-input-fields ">
+              <mat-label>late time</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Bank details -->
+        <div class="pt-5">
+          <p class="pb-2 font-medium2">Bank accounts</p>
+          <div class="d-flex justify-content-between my-4">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Account holder name</mat-label>
+              <input matInput placeholder="Account holder name" [(ngModel)]="accountHolderName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Account number</mat-label>
+              <input matInput placeholder="Account number" [(ngModel)]="accountNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Bank name</mat-label>
+              <input matInput placeholder="Bank name" [(ngModel)]="bankName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Bank branch</mat-label>
+              <input matInput placeholder="Bank branch" [(ngModel)]="bankBranch">
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-between my-4 form-padding">
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>IFSC code</mat-label>
+              <input matInput placeholder="IFSC code" [(ngModel)]="ifscCode">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="four-input-fields ">
+              <mat-label>Cheques in name of</mat-label>
+              <input matInput placeholder="Cheques in name of" [(ngModel)]="chequeName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="opacity: 0;" class="four-input-fields ">
+              <mat-label>Cheques in name of</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="opacity: 0;" class="four-input-fields ">
+              <mat-label>Cheques in name of</mat-label>
+              <input matInput [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="btn btn-lg buttonLarge">
+            ADD NEW VENDOR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
